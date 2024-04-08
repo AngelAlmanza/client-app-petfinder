@@ -9,6 +9,7 @@ export default {
       colors: {
         'icon-color': '#A3A3A3',
         'text-primary-color': '#797979',
+        'primary-gray': '#EFEFEF',
       },
     },
   },
