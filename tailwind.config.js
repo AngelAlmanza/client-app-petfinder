@@ -14,6 +14,7 @@ export default {
         'danger-color': '#EC4949',
         'success-color': '#126F0A',
         'aux-color': '#6A48C8',
+        'hover-bg': 'rgba(217, 217, 217, 0.7)',
       },
     },
   },

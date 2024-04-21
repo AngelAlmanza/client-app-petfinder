@@ -7,14 +7,14 @@ type Props = {
 
 export const MainLayout = ({ children }: Props) => {
   const [openMenu, setOpenMenu] = useState<boolean>(false)
-  const [opacity, setOpacity] = useState<string>('opacity-100')
+  const [opacity, setOpacity] = useState<string>('')
 
   const handleMenu = () => {
     setOpenMenu(!openMenu)
     if (openMenu) {
-      setOpacity('bg-blend-normal')
+      setOpacity('')
     } else {
-      setOpacity('bg-blend-luminosity')
+      setOpacity('dark-background')
     }
   }
 
