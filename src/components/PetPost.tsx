@@ -9,9 +9,10 @@ type Props = {
   postImage?: string,
   altImage?: string
   buttonByPublish: ReactNode,
+  styles?: React.CSSProperties
 }
 
-export const PetPost = ({ username, description, postImage, altImage, buttonByPublish }: Props) => {
+export const PetPost = ({ username, description, postImage, altImage, buttonByPublish, styles }: Props) => {
   const [opacityButton, setOpacityButton] = useState<string>('opacity-0');
 
   const hideButton = () => {
@@ -23,7 +24,10 @@ export const PetPost = ({ username, description, postImage, altImage, buttonByPu
   };
 
   return (
-    <article className="w-full rounded-2xl bg-white shadow p-1 flex flex-col">
+    <article
+      className="w-full rounded-2xl bg-white shadow p-1 flex flex-col"
+      style={styles}
+    >
       {
         postImage && (
           <img

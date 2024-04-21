@@ -34,18 +34,23 @@ const ButtonPostConfig: Record<PostType, ButtonTypeConfig> = {
 
 type Props = {
   type: PostType
+  text?: string
+  styles?: React.CSSProperties
   onClick: () => void
 }
 
-export const PostButton = ({ type }: Props) => {
+export const PostButton = ({ type, text, styles }: Props) => {
   const config = ButtonPostConfig[type]
 
   return (
-    <button className={`min-w-20 flex justify-center items-center py-1 px-2 rounded-xl bg-${config.color}`}>
+    <button
+      className={`min-w-20 flex justify-center items-center py-1 px-2 rounded-xl bg-${config.color}`}
+      style={styles}
+    >
       {
         config.icon && <FontAwesomeIcon icon={config.icon} className="text-white" />
       }
-      <span className="text-white text-xs font-medium ml-1">{ config.label }</span>
+      <span className="text-white text-xs font-medium ml-1">{ text || config.label }</span>
     </button>
   )
 }
