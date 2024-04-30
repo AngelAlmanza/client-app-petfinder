@@ -1,0 +1,19 @@
+import { MainLayout } from "../layouts/MainLayout";
+import { Chats } from "../components/Chats"
+
+
+export const MessagerPage = () => {
+ 
+  return (
+    <MainLayout>
+      <p className="text-xl text-center -ml-6 -mt-6 py-2 mx-auto w-screen bg-white font-bold text-text-primary-color">Chats</p>
+      <Chats/>
+      <Chats/>
+      <Chats/>
+      <Chats/>
+      <Chats/>
+      <Chats/>
+     
+    </MainLayout>
+  )
+}
