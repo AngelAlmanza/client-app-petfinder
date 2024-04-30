@@ -24,8 +24,9 @@ export const PetPost = ({ username, description, postImage, altImage, buttonByPu
   };
 
   return (
-    <article
-      className="w-full rounded-2xl bg-white shadow p-1 flex flex-col"
+    <a
+      className="w-full rounded-2xl bg-white shadow p-1 flex flex-col no-underline"
+      href="/post-details"
       style={styles}
     >
       {
@@ -60,6 +61,6 @@ export const PetPost = ({ username, description, postImage, altImage, buttonByPu
           <PostButton onClick={() => {}} type="more" />
         </div>
       </div>
-    </article>
+    </a>
   )
 }

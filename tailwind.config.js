@@ -13,6 +13,7 @@ export default {
         'primary-color': '#5AC3E1',
         'danger-color': '#EC4949',
         'success-color': '#126F0A',
+        'ligth-green': '#34D399',
         'aux-color': '#6A48C8',
         'hover-bg': 'rgba(217, 217, 217, 0.7)',
       },

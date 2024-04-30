@@ -3,6 +3,7 @@ import { HomePage } from '../pages/homePage';
 import { SignInPage } from "../pages/signInPage";
 import { RegisterPage } from "../pages/registerPage";
 import { NotFound } from "../pages/notFound";
+import { PostDetailsPage } from "../pages/postDetailsPage";
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
         element: <NotFound />,
       },
     ]
+  },
+  {
+    path: 'post-details',
+    element: <PostDetailsPage />
   },
   {
     path: '/register',
