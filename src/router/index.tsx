@@ -3,6 +3,7 @@ import { HomePage } from '../pages/homePage';
 import { SignInPage } from "../pages/signInPage";
 import { RegisterPage } from "../pages/registerPage";
 import { NotFound } from "../pages/notFound";
+import { MessagerPage } from "../pages/messagerPage";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
     path: '/register',
     element: <RegisterPage/>
   },
+  {
+    path: '/listmessenger',
+    element: <MessagerPage/>
+  }
 ])
 
 export default router;
