@@ -1,5 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 import { Post } from '../../interfaces/PostInterfaces';
+import { createPost, getPosts } from '../thunks/postThunks';
 
 interface PostState {
   posts: Post[];
@@ -14,21 +15,30 @@ const initialState: PostState = {
 export const postSlice = createSlice({
   name: 'post',
   initialState,
-  reducers: {
-    addPost: (state, action) => {
-      state.posts.push(action.payload);
-    },
-    deletePost: (state, action) => {
-      state.posts = state.posts.filter((post) => post.id !== action.payload);
-    },
-    setLoading: (state, action) => {
-      state.isLoading = action.payload;
-    },
+  reducers: {},
+  extraReducers: builder => {
+    builder.addCase(createPost.fulfilled, (state, action) => {
+      state.posts.push(action.payload!.post);
+      state.isLoading = false;
+    });
+    builder.addCase(createPost.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(createPost.rejected, (state) => {
+      state.isLoading = false;
+    });
+
+    builder.addCase(getPosts.fulfilled, (state, action) => {
+      state.posts = action.payload!;
+      state.isLoading = false;
+    });
+    builder.addCase(getPosts.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getPosts.rejected, (state) => {
+      state.isLoading = false;
+    });
   },
 });
 
-export const {
-  addPost,
-  deletePost,
-  setLoading,
-} = postSlice.actions;
+// export const {} = postSlice.actions;

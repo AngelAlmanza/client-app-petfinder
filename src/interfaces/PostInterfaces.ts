@@ -1,4 +1,4 @@
-export interface PostRequest {
+export interface StorePostRequest {
   pet:  PetRequest;
   post: PostRequest;
 }
@@ -36,4 +36,30 @@ export interface Post extends PostRequest {
   updated_at: Date;
   created_at: Date;
   id:         number;
+}
+
+export interface GetAllPostResponse {
+  posts: GetAllPostResponseData;
+}
+
+export interface GetAllPostResponseData {
+  current_page:   number;
+  data:           Post[];
+  first_page_url: string;
+  from:           number;
+  last_page:      number;
+  last_page_url:  string;
+  links:          Link[];
+  next_page_url:  null;
+  path:           string;
+  per_page:       number;
+  prev_page_url:  null;
+  to:             number;
+  total:          number;
+}
+
+export interface Link {
+  url:    null | string;
+  label:  string;
+  active: boolean;
 }

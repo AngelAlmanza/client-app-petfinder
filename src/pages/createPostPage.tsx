@@ -2,22 +2,40 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faImage } from "@fortawesome/free-solid-svg-icons"
 import { MainLayout } from "../layouts/MainLayout"
 import { PostTextInput } from "../components/inputs/PostTextInput"
-import { useState } from "react"
+import { useForm } from "../hooks/useForm"
+import { useAppDispatch } from "../store/hooks"
+import { createPost } from "../store/thunks/postThunks"
 
 export const CreatePostPage = () => {
-  const [form, setForm] = useState({
+  const dispatch = useAppDispatch();
+
+  const { name, type, breed, age, personality, title, content, location, onChange } = useForm({
     name: '',
-    description: '',
+    type: '',
+    breed: '',
+    age: '2',
+    personality: 'Happy',
+    title: 'Post prueba',
+    content: '',
     location: '',
-    animalType: '',
-    race: '',
   });
 
-  const handleChange = (key: string, value: string) => {
-    setForm({
-      ...form,
-      [key]: value,
-    });
+  const handleCreatePost = () => {
+    dispatch(createPost({
+      pet: {
+        name,
+        type,
+        breed,
+        age,
+        personality,
+      },
+      post: {
+        title,
+        content,
+        location,
+        type: 'lost',
+      },
+    }));
   };
 
   return (
@@ -38,36 +56,41 @@ export const CreatePostPage = () => {
       <section className="flex flex-wrap justify-center items-center">
         <PostTextInput
           placeholder="Tipo de animal"
-          value={form.animalType}
-          onChange={(value) => handleChange('animalType', value)}
+          value={type}
+          onChange={(value) => onChange('type', value)}
           style={{ width: 'calc(50% - 8px)', marginRight: '8px' }}
         />
         <PostTextInput
           placeholder="Raza"
-          value={form.race}
-          onChange={(value) => handleChange('race', value)}
+          value={breed}
+          onChange={(value) => onChange('breed', value)}
           style={{ width: 'calc(50% - 8px)', marginLeft: '8px' }}
         />
         <PostTextInput
           placeholder="Nombre de la mascota"
-          value={form.name}
-          onChange={(value) => handleChange('name', value)}
+          value={name}
+          onChange={(value) => onChange('name', value)}
         />
         <PostTextInput
           placeholder="Ubicación donde se perdió"
-          value={form.location}
-          onChange={(value) => handleChange('location', value)}
+          value={location}
+          onChange={(value) => onChange('location', value)}
         />
         <PostTextInput
           placeholder="Detalles extra (color, raza, tamaño, etc.)"
-          value={form.description}
-          onChange={(value) => handleChange('description', value)}
+          value={content}
+          onChange={(value) => onChange('content', value)}
         />
       </section>
 
       <section className="w-full my-4 flex justify-evenly items-center">
         <button className="w-1/3 bg-danger-color text-white text-sm font-medium py-3 rounded-3xl mt-4">Cancelar</button>
-        <button className="w-1/3 bg-primary-color text-white text-sm font-medium py-3 rounded-3xl mt-4">Publicar</button>
+        <button
+          onClick={handleCreatePost}
+          className="w-1/3 bg-primary-color text-white text-sm font-medium py-3 rounded-3xl mt-4"
+        >
+          Publicar
+        </button>
       </section>
     </MainLayout>
   )
