@@ -4,6 +4,7 @@ import { SignInPage } from "../pages/signInPage";
 import { RegisterPage } from "../pages/registerPage";
 import { NotFound } from "../pages/notFound";
 import { PostDetailsPage } from "../pages/postDetailsPage";
+import { CreatePostPage } from "../pages/createPostPage";
 
 const router = createBrowserRouter([
   {
@@ -60,6 +61,14 @@ const router = createBrowserRouter([
     path: '/register',
     element: <RegisterPage/>
   },
+  {
+    path: '/create-post',
+    element: <CreatePostPage />
+  },
+  {
+    path: '*',
+    element: <NotFound />,
+  }
 ])
 
 export default router;
