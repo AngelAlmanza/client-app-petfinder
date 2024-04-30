@@ -3,8 +3,22 @@ import { TextInput } from "../components/inputs/TextInput"
 import dogAndCat from "../assets/images/dog-and-cat-banner.png"
 import dogBanner from "../assets/images/dog-banner.jpg"
 import birdBanner from "../assets/images/bird-banner.jpg"
+import { useForm } from "../hooks/useForm"
+import { useAppDispatch } from "../store/hooks"
+import { login } from "../store/thunks/authThunks"
 
 export const SignInPage = () => {
+  const dispatch = useAppDispatch();
+
+  const { email, password, onChange } = useForm({
+    email: '',
+    password: '',
+  });
+
+  const onSubmit = () => {
+    dispatch(login({ email, password }))
+  }
+
   return (
     <>
       <div
@@ -16,14 +30,22 @@ export const SignInPage = () => {
             <img src={dogAndCat} alt="PetFinder Logo" className="-mt-14" />
           </div>
           <div className="w-100 -mt-16 h-36 flex flex-col justify-evenly items-center">
-            <TextInput placeholder="Correo Electronico" iconName="email" />
-            <TextInput placeholder="Contraseña" iconName="password" />
+            <TextInput
+              placeholder="Correo Electronico"
+              iconName="email"
+              onChange={(value) => onChange('email', value)}
+            />
+            <TextInput
+              placeholder="Contraseña"
+              iconName="password"
+              onChange={(value) => onChange('password', value)}
+            />
           </div>
           <div className="w-100 mb-4">
             <p className="text-sm text-center text-white font-medium">Rescata, adopta, ama: ¡Un gesto que transforma vidas!</p>
           </div>
         </div>
-        <InitialPageCircleFooter />
+        <InitialPageCircleFooter onSubmit={onSubmit} />
       </div>
       <div className="bg-white">
         <h2 className="text-center text-base font-bold my-4 text-text-primary-color">¿Perdiste a tu mascota?</h2>

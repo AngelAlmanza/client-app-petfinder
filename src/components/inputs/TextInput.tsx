@@ -8,6 +8,7 @@ type Props = {
   iconName: IconName
   className?: string
   style?: React.CSSProperties
+  onChange: (value: string) => void
 }
 
 const ICONS: Record<IconName, IconDefinition> = {
@@ -16,7 +17,7 @@ const ICONS: Record<IconName, IconDefinition> = {
   'search': faMagnifyingGlass,
 }
 
-export const TextInput = ({ placeholder, iconName, className, style }: Props) => {
+export const TextInput = ({ placeholder, iconName, className, style, onChange }: Props) => {
   const icon = ICONS[iconName]
   return (
     <div className="w-full relative">
@@ -25,6 +26,7 @@ export const TextInput = ({ placeholder, iconName, className, style }: Props) =>
         type="text"
         placeholder={placeholder}
         style={style}
+        onChange={(e) => onChange(e.target.value)}
       />
       <FontAwesomeIcon color="#A3A3A3" icon={icon} className="absolute right-4 top-[14px]" />
     </div>
