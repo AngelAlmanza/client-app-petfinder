@@ -2,7 +2,11 @@ import { useEffect, useState } from 'react';
 import heartSignIn from '../assets/images/heart-sign-in.png';
 import { SpecialButton } from './buttons/SpecialButton';
 
-export const InitialPageCircleFooter = () => {
+type Props = {
+  onSubmit: () => void
+}
+
+export const InitialPageCircleFooter = ({ onSubmit }: Props) => {
   const [screenSize, setScreenSize] = useState(window.innerWidth)
 
   useEffect(() => {
@@ -25,7 +29,7 @@ export const InitialPageCircleFooter = () => {
         height: screenSize,
       }}>
         <div className="w-100">
-          <SpecialButton text="Iniciar Sesión" />
+          <SpecialButton text="Iniciar Sesión" onClick={onSubmit} />
         </div>
         <div className="w-44 flex justify-center">
           <img className="w-100 h-fit object-cover mt-4" src={heartSignIn} alt="Love Pets Heart" />
