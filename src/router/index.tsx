@@ -5,6 +5,7 @@ import { RegisterPage } from "../pages/registerPage";
 import { NotFound } from "../pages/notFound";
 import { MessagerPage } from "../pages/messagerPage";
 import { PostDetailsPage } from "../pages/postDetailsPage";
+import { EditporfilePage } from "../pages/editporfilePage";
 
 const router = createBrowserRouter([
   {
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
   {
     path: '/listmessenger',
     element: <MessagerPage/>
+  },
+  {
+    path: '/editporfile',
+    element : <EditporfilePage/>
   }
 ])
 
