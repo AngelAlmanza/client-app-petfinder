@@ -5,11 +5,8 @@ import { RegisterPage } from "../pages/registerPage";
 import { NotFound } from "../pages/notFound";
 import { MessagerPage } from "../pages/messagerPage";
 import { PostDetailsPage } from "../pages/postDetailsPage";
-<<<<<<< HEAD
 import { EditporfilePage } from "../pages/editporfilePage";
-=======
 import { CreatePostPage } from "../pages/createPostPage";
->>>>>>> 9477ab4f74dbadd1649a6ba1165eadea12428bab
 
 const router = createBrowserRouter([
   {
@@ -64,24 +61,23 @@ const router = createBrowserRouter([
   },
   {
     path: '/register',
-    element: <RegisterPage/>
+    element: <RegisterPage />
   },
   {
     path: '/listmessenger',
-    element: <MessagerPage/>
+    element: <MessagerPage />
   },
   {
-<<<<<<< HEAD
     path: '/editporfile',
-    element : <EditporfilePage/>
-=======
+    element: <EditporfilePage />
+  },
+  {
     path: '/create-post',
     element: <CreatePostPage />
   },
   {
     path: '*',
     element: <NotFound />,
->>>>>>> 9477ab4f74dbadd1649a6ba1165eadea12428bab
   }
 ])
 
