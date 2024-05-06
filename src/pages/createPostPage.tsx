@@ -41,19 +41,19 @@ export const CreatePostPage = () => {
   return (
     <MainLayout>
       <section className="w-full px-4">
-        <h2 className="text-lg font-medium text-text-primary-color text-center">¿Perdiste una mascota?</h2>
-        <div className="h-px bg-primary-color w-full my-4" />
-        <h4 className="text-sm font-medium text-center text-text-primary-color">¡La comunidad puede ayudarte a recuperarla!</h4>
+        <h2 className="text-lg md:text-3xl font-medium text-text-primary-color text-center">¿Perdiste una mascota?</h2>
+        <div className="h-px md:h-0.5 bg-primary-color w-full my-4" />
+        <h4 className="text-sm md:text-xl font-medium text-center text-text-primary-color">¡La comunidad puede ayudarte a recuperarla!</h4>
       </section>
 
-      <section className="w-100 my-4">
-        <div className="w-100 h-52 mb-2 bg-gray-400 rounded-2xl flex justify-center items-center">
+      <section className="w-100 my-4 md:px-24">
+        <div className="w-100 h-52 md:h-60 mb-2 bg-gray-400 rounded-2xl flex justify-center items-center">
           <FontAwesomeIcon icon={faImage} className="text-4xl text-text-primary-color" />
         </div>
-        <p className="text-sm font-medium text-text-primary-color">Por lo que es necesario que proporciones los siguientes datos.</p>
+        <p className="text-sm md:text-lg font-medium text-text-primary-color">Por lo que es necesario que proporciones los siguientes datos.</p>
       </section>
 
-      <section className="flex flex-wrap justify-center items-center">
+      <section className="flex flex-wrap justify-center items-center md:px-24">
         <PostTextInput
           placeholder="Tipo de animal"
           value={type}
@@ -83,11 +83,11 @@ export const CreatePostPage = () => {
         />
       </section>
 
-      <section className="w-full my-4 flex justify-evenly items-center">
-        <button className="w-1/3 bg-danger-color text-white text-sm font-medium py-3 rounded-3xl mt-4">Cancelar</button>
+      <section className="w-full my-4 flex justify-evenly items-center md:px-6">
+        <button className="w-1/3 bg-danger-color text-white text-sm md:text-2xl font-medium py-3 rounded-3xl mt-4">Cancelar</button>
         <button
           onClick={handleCreatePost}
-          className="w-1/3 bg-primary-color text-white text-sm font-medium py-3 rounded-3xl mt-4"
+          className="w-1/3 bg-primary-color text-white text-sm md:text-2xl font-medium py-3 rounded-3xl mt-4"
         >
           Publicar
         </button>
