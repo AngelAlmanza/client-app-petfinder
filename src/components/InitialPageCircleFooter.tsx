@@ -23,16 +23,16 @@ export const InitialPageCircleFooter = ({ onSubmit }: Props) => {
 
   return (
     <div
-      className={`bg-white rounded-full flex flex-col items-center pt-10`}
+      className={`bg-white rounded-full flex flex-col items-center pt-10 md:-mx-28 md:pt-16 md:mt-20 `}
       style={{
         width: screenSize,
         height: screenSize,
       }}>
-        <div className="w-100">
+        <div className="w-100 md:mt-6">
           <SpecialButton text="Iniciar Sesión" onClick={onSubmit} />
         </div>
         <div className="w-44 flex justify-center">
-          <img className="w-100 h-fit object-cover mt-4" src={heartSignIn} alt="Love Pets Heart" />
+          <img className="w-100 h-fit object-cover mt-4 md:w-20" src={heartSignIn} alt="Love Pets Heart" />
         </div>
     </div>
   )
