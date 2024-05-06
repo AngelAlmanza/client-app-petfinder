@@ -22,7 +22,7 @@ export const TextInput = ({ placeholder, iconName, className, style, onChange }:
   return (
     <div className="w-full relative">
       <input
-        className={`w-full bg-white px-4 py-3 outline-none rounded-3xl pr-10 text-sm font-medium ${className}`}
+        className={`w-full bg-white px-4 py-3 outline-none rounded-3xl pr-10 text-sm md:text-lg font-medium   ${className}`}
         type="text"
         placeholder={placeholder}
         style={style}
