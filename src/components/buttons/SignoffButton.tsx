@@ -9,9 +9,9 @@ interface ButtonProps {
 
 // Creamos el componente de botón
 const Button: React.FC<ButtonProps> = ({  text }) => {
-    return (
+    return ( 
         
-        <button className="mt-5 text-danger-color underline  ">
+        <button className="mt-5 text-danger-color underline md:text-2xl md:mt-8 ">
             {text}
         </button>
     );

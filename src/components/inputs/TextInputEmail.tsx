@@ -6,7 +6,7 @@ export const TextInputEmail = () => {
             <div className="w-full relative">
                 <div className="relative">
                     <input 
-                        className="appearance-none bg-transparent border-b-2 border-b-icon-color w-full text-text-primary-color text-center text-base py-1 px-10 leading-tight focus:outline-none" 
+                        className="appearance-none bg-transparent border-b-2 border-b-icon-color w-full text-text-primary-color text-center text-base md:text-3xl py-1 px-10 leading-tight focus:outline-none" 
                         placeholder="Lorem Ipsum" 
                     />
                     <img 
@@ -17,7 +17,7 @@ export const TextInputEmail = () => {
                 </div>
             </div>
             <div>
-                <p className="text-sm font-medium text-text-primary-color">Email</p>
+                <p className="text-sm md:text-2xl font-medium text-text-primary-color">Email</p>
             </div>
         </div>
     );
