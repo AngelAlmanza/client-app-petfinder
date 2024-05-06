@@ -22,7 +22,7 @@ export const RegisterPage = () => {
 
     return (
         <>
-            <div className="w-screen h-screen pt-10 min-h-screen gradient-background overflow-hidden">
+            <div className="w-screen h-screen pt-10 min-h-screen gradient-background overflow-hidden md:px-24">
                 <div className="px-4">
                     <div className="w-full flex justify-center items-center flex-col">
                         <h1 className="text-center text-white text-4xl font-normal">PetFinder</h1>
@@ -51,10 +51,10 @@ export const RegisterPage = () => {
                             />
                         </div>
                     </div>
-                    <ul className="w-fit mx-auto mt-10 mb-4">
-                        <li className="text-sm text-white font-medium mb-1 list-item list-disc">Minimo debe contener 8 letras</li>
-                        <li className="text-sm text-white font-medium mb-1 list-item list-disc">Utiliza por lo menos 1 mayuscula</li>
-                        <li className="text-sm text-white font-medium mb-1 list-item list-disc">Utiliza por lo menos 1 numero</li>
+                    <ul className="w-fit mx-auto mt-10 mb-4 md:mt-16">
+                        <li className="text-sm md:text-xl text-white font-medium mb-1 list-item list-disc">Minimo debe contener 8 letras</li>
+                        <li className="text-sm md:text-xl text-white font-medium mb-1 list-item list-disc">Utiliza por lo menos 1 mayuscula</li>
+                        <li className="text-sm md:text-xl text-white font-medium mb-1 list-item list-disc">Utiliza por lo menos 1 numero</li>
                     </ul>
                     <RegisterButton text="Registrar" onClick={handleRegister} />
                 </div>

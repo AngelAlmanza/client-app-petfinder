@@ -5,8 +5,8 @@ type Props = {
 
 export const PostTag = ({ text, color }: Props) => {
   return (
-    <div className="w-40 px-2 overflow-hidden">
-      <p className={`w-100 py-1 rounded-2xl text-center font-bold text-sm text-white line-clamp-1 bg-${color}`}>{ text }</p>
+    <div className="w-40 px-2 md:px-4 overflow-hidden md:-mr-1">
+      <p className={`w-100 py-1 rounded-2xl text-center font-bold text-sm md:text-lg text-white line-clamp-1 bg-${color}`}>{ text }</p>
     </div>
   )
 }
