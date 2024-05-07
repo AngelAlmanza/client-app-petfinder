@@ -25,7 +25,7 @@ export const PetPost = ({ username, description, postImage, altImage, buttonByPu
 
   return (
     <a
-      className="w-full rounded-2xl bg-white shadow p-1 flex flex-col no-underline"
+      className="w-full rounded-2xl bg-white shadow p-1 flex flex-col no-underline md:px-10 md:max-w-2xl md:ml-7"
       href="/post-details"
       style={styles}
     >
@@ -33,18 +33,18 @@ export const PetPost = ({ username, description, postImage, altImage, buttonByPu
         postImage && (
           <img
             src={postImage} alt={altImage}
-            className="w-full h-52 object-cover rounded-2xl"
+            className="w-full h-52 md:h-64 object-cover rounded-2xl"
           />
         )
       }
       <div className="px-2">
         <div className="w-100 flex justify-between items-center my-3 relative">
           <div>
-            <FontAwesomeIcon icon={faUser} className="text-text-primary-color text-xl" />
-            <span className="ml-2 text-sm font-medium text-text-primary-color">{ username }</span>
+            <FontAwesomeIcon icon={faUser} className="text-text-primary-color text-xl md:text-3xl" />
+            <span className="ml-2 text-sm md:text-xl font-medium text-text-primary-color">{ username }</span>
           </div>
           <button onClick={hideButton}>
-            <FontAwesomeIcon icon={faEllipsis} className="text-text-primary-color text-xl" />
+            <FontAwesomeIcon icon={faEllipsis} className="text-text-primary-color text-xl md:text-4xl" />
           </button>
           <div className={`absolute right-0 top-4 transition-all ${opacityButton}`} >
             <button className="bg-primary-gray rounded-lg shadow-md py-2 px-4 flex items-center">
@@ -53,7 +53,7 @@ export const PetPost = ({ username, description, postImage, altImage, buttonByPu
             </button>
           </div>
         </div>
-        <p className="mb-4 text-text-primary-color text-sm overflow-hidden h-14 line-clamp-3">
+        <p className="mb-4 text-text-primary-color text-sm md:text-lg overflow-hidden h-14 line-clamp-3">
           { description }
         </p>
         <div className="flex justify-between items-center my-2">
