@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { RouterProvider } from 'react-router-dom'
-import router from './router/index.tsx'
+import { MainRouter } from './router/index.tsx'
 import './styles/index.css'
 import { Provider } from 'react-redux'
 import { store } from './store/store.ts'
@@ -9,7 +8,7 @@ import { store } from './store/store.ts'
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <MainRouter />
     </Provider>
   </React.StrictMode>,
 )

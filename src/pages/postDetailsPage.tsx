@@ -1,5 +1,4 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { MainLayout } from "../layouts/MainLayout"
 import { faEllipsis, faFlag, faPaw, faLocationDot, faPhone, faArrowLeft } from "@fortawesome/free-solid-svg-icons"
 import { useState } from "react";
 import { PostTag } from "../components/PostTag";
@@ -16,7 +15,7 @@ export const PostDetailsPage = () => {
   };
 
   return (
-    <MainLayout>
+    <>
       <section className="w-full h-72 relative md:px-20">
         <img src="https://via.placeholder.com/150" className="w-full h-full object-cover rounded-lg" />
         <div className="w-100 h-4 flex justify-center items-center gap-2 absolute bottom-8 left-1/2 -translate-x-1/2">
@@ -91,6 +90,6 @@ export const PostDetailsPage = () => {
           <span className="ml-2 text-sm md:text-3xl text-white font-semibold">Contactar</span>
         </button>
       </section>
-    </MainLayout>
+    </>
   )
 }

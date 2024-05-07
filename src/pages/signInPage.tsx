@@ -4,11 +4,15 @@ import dogAndCat from "../assets/images/dog-and-cat-banner.png"
 import dogBanner from "../assets/images/dog-banner.jpg"
 import birdBanner from "../assets/images/bird-banner.jpg"
 import { useForm } from "../hooks/useForm"
-import { useAppDispatch } from "../store/hooks"
+import { useAppDispatch, useAppSelector } from "../store/hooks"
 import { login } from "../store/thunks/authThunks"
+import { useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 
 export const SignInPage = () => {
   const dispatch = useAppDispatch();
+  const token = useAppSelector(state => state.auth.token);
+  const navigate = useNavigate();
 
   const { email, password, onChange } = useForm({
     email: '',
@@ -17,7 +21,13 @@ export const SignInPage = () => {
 
   const onSubmit = () => {
     dispatch(login({ email, password }))
-  }
+  };
+
+  useEffect(() => {
+    if (token.length > 0) {
+      navigate('/home');
+    }
+  }, [token, navigate]);
 
   return (
     <>

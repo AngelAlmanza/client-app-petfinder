@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { PetPost } from "../components/PetPost"
 import { TextAreaCreatePost } from "../components/TextAreaCreatePost";
 import { PostButton } from "../components/buttons/PostButton";
-import { MainLayout } from "../layouts/MainLayout";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { getPosts } from "../store/thunks/postThunks";
 
@@ -16,7 +15,7 @@ export const HomePage = () => {
   }, [dispatch]);
 
   return (
-    <MainLayout>
+    <>
       <section className="mb-4">
         <TextAreaCreatePost value={newPostText} onChange={setNewPostText} />
       </section>
@@ -34,6 +33,6 @@ export const HomePage = () => {
           ))
         }
       </section>
-    </MainLayout>
+    </>
   )
-}
+};

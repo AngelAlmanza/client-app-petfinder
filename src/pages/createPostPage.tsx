@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faImage } from "@fortawesome/free-solid-svg-icons"
-import { MainLayout } from "../layouts/MainLayout"
 import { PostTextInput } from "../components/inputs/PostTextInput"
 import { useForm } from "../hooks/useForm"
 import { useAppDispatch } from "../store/hooks"
@@ -39,7 +38,7 @@ export const CreatePostPage = () => {
   };
 
   return (
-    <MainLayout>
+    <>
       <section className="w-full px-4">
         <h2 className="text-lg md:text-3xl font-medium text-text-primary-color text-center">¿Perdiste una mascota?</h2>
         <div className="h-px md:h-0.5 bg-primary-color w-full my-4" />
@@ -92,6 +91,6 @@ export const CreatePostPage = () => {
           Publicar
         </button>
       </section>
-    </MainLayout>
+    </>
   )
 }
