@@ -44,13 +44,13 @@ export const PostButton = ({ type, text, styles }: Props) => {
 
   return (
     <button
-      className={`min-w-20 flex justify-center items-center py-1 px-2 rounded-xl bg-${config.color}`}
+      className={` min-w-20 flex justify-center items-center py-1 px-2 rounded-xl bg-${config.color}`}
       style={styles}
     >
       {
         config.icon && <FontAwesomeIcon icon={config.icon} className="text-white" />
       }
-      <span className="text-white text-xs font-medium ml-1">{ text || config.label }</span>
+      <span className="text-white text-xs md:text-xl font-medium ml-1">{ text || config.label }</span>
     </button>
   )
 }
