@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import dogAndCatBanner from '../../assets/images/dog-and-cat-banner.png'
 import { TextInput } from '../../components/inputs/TextInput'
 import { menuRoutes } from "../../constants/menuRoutes"
+import { NavLink } from "react-router-dom"
 
 type Props = {
   handleMenu: () => void
@@ -24,19 +25,19 @@ export const Header = ({ openMenu, handleMenu }: Props) => {
         }
         {
           openMenu && (
-            <nav className="w-44 py-6 rounded-3xl bg-primary-gray absolute top-16 left-0 header-transition-nav-bar">
+            <nav className="w-44 py-6 rounded-3xl bg-primary-gray absolute top-16 left-0 header-transition-nav-bar z-50">
               <div className="w-3/4 h-px bg-black mx-auto mb-2"></div>
               <ul className="w-100 flex flex-col items-start">
                 {
                   menuRoutes.map((route, index) => (
                     <li key={index} className="w-full block">
-                      <a
-                        href={route.path}
+                      <NavLink
+                        to={route.path}
                         className="w-full flex items-center px-6 py-2 text-text-primary-color hover:text-primary-color hover:bg-hover-bg transition"
                       >
                         <FontAwesomeIcon icon={route.icon} className="mr-1" />
                         <span>{route.name}</span>
-                      </a>
+                      </NavLink>
                     </li>
                   ))
                 }

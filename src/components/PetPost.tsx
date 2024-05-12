@@ -2,6 +2,7 @@ import { faEllipsis, faUser, faFlag } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ReactNode, useState } from "react";
 import { PostButton } from "./buttons/PostButton";
+import { Link } from "react-router-dom";
 
 type Props = {
   username: string,
@@ -24,9 +25,9 @@ export const PetPost = ({ username, description, postImage, altImage, buttonByPu
   };
 
   return (
-    <a
+    <Link
       className="w-full rounded-2xl bg-white shadow p-1 flex flex-col no-underline"
-      href="/post-details"
+      to="/post-details"
       style={styles}
     >
       {
@@ -61,6 +62,6 @@ export const PetPost = ({ username, description, postImage, altImage, buttonByPu
           <PostButton onClick={() => {}} type="more" />
         </div>
       </div>
-    </a>
+    </Link>
   )
 }

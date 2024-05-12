@@ -2,9 +2,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEllipsis, faFlag, faPaw, faLocationDot, faPhone, faArrowLeft } from "@fortawesome/free-solid-svg-icons"
 import { useState } from "react";
 import { PostTag } from "../components/PostTag";
+import { useNavigate } from "react-router-dom";
 
 export const PostDetailsPage = () => {
   const [opacityButton, setOpacityButton] = useState<string>('opacity-0');
+  const navigate = useNavigate();
 
   const hideButton = () => {
     if (opacityButton === 'opacity-0') {
@@ -13,6 +15,10 @@ export const PostDetailsPage = () => {
       setOpacityButton('opacity-0')
     }
   };
+
+  const onBack = () => {
+    navigate(-1);
+  }
 
   return (
     <>
@@ -25,7 +31,7 @@ export const PostDetailsPage = () => {
         </div>
         <span
           className="w-3/4 md:w-3/5 inline-flex justify-between items-center rounded-2xl py-1 px-3
-          bg-red-500 font-bold text-white uppercase text-xl md:text-2xl absolute bottom-0 
+          bg-red-500 font-bold text-white uppercase text-xl md:text-2xl absolute bottom-0
             left-1/2 -translate-x-1/2 translate-y-1/2"
         >
           <FontAwesomeIcon icon={faPaw} size="2x" className="text-white text-xs md:text-lg " />
@@ -81,7 +87,7 @@ export const PostDetailsPage = () => {
       </section>
 
       <section className="flex items-center justify-evenly mb-4 mt-8 md:mt-16">
-        <button>
+        <button onClick={onBack}>
           <FontAwesomeIcon icon={faArrowLeft} className="text-sm md:text-3xl text-text-primary-color font-semibold" />
           <span className="ml-2 text-sm md:text-3xl text-text-primary-color font-semibold underline">Volver</span>
         </button>
