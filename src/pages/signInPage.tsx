@@ -51,7 +51,7 @@ export const SignInPage = () => {
               onChange={(value) => onChange('password', value)}
             />
           </div>
-          <div className="w-100 mb-4">
+          <div className="w-100 mb-4 mt-2">
             <p className="text-sm md:text-2xl text-center text-white font-medium">Rescata, adopta, ama: ¡Un gesto que transforma vidas!</p>
           </div>
         </div>

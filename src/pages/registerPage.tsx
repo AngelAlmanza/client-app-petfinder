@@ -5,9 +5,13 @@ import RegisterButton from "../components/buttons/RegisterButton";
 import { useForm } from "../hooks/useForm";
 import { register } from "../store/thunks/authThunks";
 import { useAppDispatch } from "../store/hooks";
+import { useState } from 'react';
 
 export const RegisterPage = () => {
     const dispatch = useAppDispatch();
+    const [nameValid, setNameValid] = useState<boolean>(true);
+    const [emailValid, setEmailValid] = useState<boolean>(true);
+    const [passwordValid, setPasswordValid] = useState<boolean>(true);
 
     const { name, email, password, onChange } = useForm({
         name: '',
@@ -32,7 +36,7 @@ export const RegisterPage = () => {
                         <div className="mb-4 w-4/5">
                             <TextInput
                                 placeholder="Nombre(s)"
-                                iconName="email"
+                                iconName="name"
                                 onChange={(value) => onChange('name', value)}
                             />
                         </div>
@@ -51,10 +55,10 @@ export const RegisterPage = () => {
                             />
                         </div>
                     </div>
-                    <ul className="w-fit mx-auto mt-10 mb-4 md:mt-16">
-                        <li className="text-sm md:text-xl text-white font-medium mb-1 list-item list-disc">Minimo debe contener 8 letras</li>
-                        <li className="text-sm md:text-xl text-white font-medium mb-1 list-item list-disc">Utiliza por lo menos 1 mayuscula</li>
-                        <li className="text-sm md:text-xl text-white font-medium mb-1 list-item list-disc">Utiliza por lo menos 1 numero</li>
+                    <ul className="w-fit mx-auto mt-20 mb-4 md:mt-32">
+                    <li className={`text-sm md:text-xl font-medium mb-1 list-item list-disc ${nameValid ? 'text-white' : 'text-red-500'}`}>Minimo debe contener 8 letras</li>
+                    <li className={`text-sm md:text-xl font-medium mb-1 list-item list-disc ${emailValid ? 'text-white' : 'text-red-500'}`}>Utiliza por lo menos 1 mayuscula</li>
+                    <li className={`text-sm md:text-xl font-medium mb-1 list-item list-disc ${passwordValid ? 'text-white' : 'text-red-500'}`}>Utiliza por lo menos 1 numero</li>
                     </ul>
                     <RegisterButton text="Registrar" onClick={handleRegister} />
                 </div>
