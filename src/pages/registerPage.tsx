@@ -2,27 +2,15 @@
 import { TextInput } from "../components/inputs/TextInput";
 import dogAndCat from "../assets/images/dog-and-cat-banner.png";
 import RegisterButton from "../components/buttons/RegisterButton";
-import { useForm } from "../hooks/useForm";
 import { register } from "../store/thunks/authThunks";
 import { useAppDispatch } from "../store/hooks";
-import { useState } from 'react';
+import { Formik } from "formik";
+import { isValidEmail, isValidPassword } from "../utils/validatiors";
+import { ERROR_MESSAGES } from "../constants/errorsMessages";
+import { passwordRules } from "../constants/passwordRules";
 
 export const RegisterPage = () => {
     const dispatch = useAppDispatch();
-    const [nameValid, setNameValid] = useState<boolean>(true);
-    const [emailValid, setEmailValid] = useState<boolean>(true);
-    const [passwordValid, setPasswordValid] = useState<boolean>(true);
-
-    const { name, email, password, onChange } = useForm({
-        name: '',
-        lastName: '',
-        email: '',
-        password: ''
-    });
-
-    const handleRegister = () => {
-        dispatch(register({ name, email, password, password_confirmation: password}))
-    };
 
     return (
         <>
@@ -32,35 +20,84 @@ export const RegisterPage = () => {
                         <h1 className="text-center text-white text-4xl font-normal">PetFinder</h1>
                         <img src={dogAndCat} alt="PetFinder Logo" className="-mt-14" />
                     </div>
-                    <div className="-mt-16 h-36 flex flex-col justify-evenly items-center">
-                        <div className="mb-4 w-4/5">
-                            <TextInput
-                                placeholder="Nombre(s)"
-                                iconName="name"
-                                onChange={(value) => onChange('name', value)}
-                            />
-                        </div>
-                        <div className="mb-4 w-4/5">
-                            <TextInput
-                                placeholder="Correo Electrónico"
-                                iconName="email"
-                                onChange={(value) => onChange('email', value)}
-                            />
-                        </div>
-                        <div className="mb-4 w-4/5">
-                            <TextInput
-                                placeholder="Contraseña"
-                                iconName="password"
-                                onChange={(value) => onChange('password', value)}
-                            />
-                        </div>
-                    </div>
-                    <ul className="w-fit mx-auto mt-20 mb-4 md:mt-32">
-                    <li className={`text-sm md:text-xl font-medium mb-1 list-item list-disc ${nameValid ? 'text-white' : 'text-red-500'}`}>Minimo debe contener 8 letras</li>
-                    <li className={`text-sm md:text-xl font-medium mb-1 list-item list-disc ${emailValid ? 'text-white' : 'text-red-500'}`}>Utiliza por lo menos 1 mayuscula</li>
-                    <li className={`text-sm md:text-xl font-medium mb-1 list-item list-disc ${passwordValid ? 'text-white' : 'text-red-500'}`}>Utiliza por lo menos 1 numero</li>
-                    </ul>
-                    <RegisterButton text="Registrar" onClick={handleRegister} />
+                    <Formik
+                        initialValues={{ name: '', email: '', password: '' }}
+                        validate={(values) => {
+                            console.log(values)
+                            const errors: Record<string, string> = {};
+                            if (!isValidEmail(values.email)) {
+                                errors.email = ERROR_MESSAGES.INVALID_EMAIL;
+                            }
+                            if (!isValidPassword(values.password)) {
+                                errors.password = ERROR_MESSAGES.INVALID_PASSWORD;
+                            }
+                            return errors;
+                        }}
+                        onSubmit={(values, { setSubmitting }) => {
+                            dispatch(register({
+                                name: values.name,
+                                email: values.email,
+                                password: values.password,
+                                password_confirmation: values.password
+                            }));
+                            setSubmitting(false);
+                        }}
+                    >
+                        {({
+                            values,
+                            errors,
+                            handleChange,
+                            handleSubmit,
+                            isSubmitting
+                        }) => (
+                            <form className="-mt-16 h-36 flex flex-col justify-evenly items-center">
+                                <div className="mb-4 w-4/5">
+                                    <TextInput
+                                        name="name"
+                                        value={values.name}
+                                        placeholder="Nombre(s)"
+                                        iconName="name"
+                                        onChange={handleChange}
+                                    />
+                                    {errors.name ? <p className="text-red-500 text-sm">{errors.name}</p> : null}
+                                </div>
+                                <div className="mb-4 w-4/5">
+                                    <TextInput
+                                        name="email"
+                                        value={values.email}
+                                        placeholder="Correo Electrónico"
+                                        iconName="email"
+                                        onChange={handleChange}
+                                    />
+                                    {errors.email ? <p className="text-red-500 text-sm">{errors.email}</p> : null}
+                                </div>
+                                <div className="mb-4 w-4/5">
+                                    <TextInput
+                                        name="password"
+                                        value={values.password}
+                                        placeholder="Contraseña"
+                                        iconName="password"
+                                        onChange={handleChange}
+                                    />
+                                    {errors.password ? <p className="text-red-500 text-sm">{errors.password}</p> : null}
+                                </div>
+                                {JSON.stringify(values, null, 2)}
+                                <ul className="w-fit mx-auto mb-4 md:mt-32">
+                                    {
+                                        passwordRules.map((rule, index) => (
+                                            <li
+                                                key={index}
+                                                className="text-sm md:text-xl font-medium mb-1 list-item list-disc text-white"
+                                            >
+                                                {rule}
+                                            </li>
+                                        ))
+                                    }
+                                </ul>
+                                <RegisterButton text="Registrar" disabled={isSubmitting} onClick={handleSubmit} />
+                            </form>
+                        )}
+                    </Formik>
                 </div>
             </div>
             <div className="bg-black flex justify-center items-center py-2">
