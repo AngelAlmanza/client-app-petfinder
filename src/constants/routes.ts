@@ -1,6 +1,6 @@
 export enum PublicRoutes {
   START_PAGE = '/',
-  SIGN_IN_PAGE = '/sign-in',
+  LOGIN = '/login',
   REGISTER_PAGE = '/register',
   NOT_FOUND = '*',
 }

@@ -10,7 +10,7 @@ export const PublicRoutes = () => {
   return (
     <Routes>
       <Route path={PublicRoutesEnum.START_PAGE} element={<StartPage />} />
-      <Route path={PublicRoutesEnum.SIGN_IN_PAGE} element={<SignInPage />} />
+      <Route path={PublicRoutesEnum.LOGIN} element={<SignInPage />} />
       <Route path={PublicRoutesEnum.REGISTER_PAGE} element={<RegisterPage />} />
       <Route path={PublicRoutesEnum.NOT_FOUND} element={<NotFound />} />
     </Routes>
