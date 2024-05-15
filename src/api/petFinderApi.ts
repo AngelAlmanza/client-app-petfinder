@@ -1,5 +1,8 @@
 import axios from 'axios';
 import { HTTP_STATUS, HttpError } from '../interfaces/HttpInterfaces';
+import { PublicRoutes } from '../constants/routes';
+import { PATHS_WITHOUT_TOKEN } from '../constants/pathsWithoutToken';
+import { getAuthToken, removeAuthToken } from '../utils/expirationToken';
 
 const BASE_URL = 'http://127.0.0.1:8000/api';
 
@@ -12,8 +15,8 @@ export const petFinderApi = axios.create({
 
 function errorHandler(error: HttpError<unknown>) {
   if (error.response && error.response.status === HTTP_STATUS.UNAUTHORIZED) {
-    localStorage.removeItem('token');
-    window.location.href = '/login';
+    removeAuthToken();
+    window.location.href = PublicRoutes.LOGIN;
     window.location.reload();
   }
 
@@ -26,3 +29,16 @@ petFinderApi.interceptors.response.use(
   },
   error => errorHandler(error)
 );
+
+petFinderApi.interceptors.request.use((config) => {
+  const token = getAuthToken();
+
+  const isAuthEndpoint = PATHS_WITHOUT_TOKEN.some(path => config.url?.includes(path));
+
+  if (token && !isAuthEndpoint) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+
+  return config;
+
+}, error => Promise.reject(error));

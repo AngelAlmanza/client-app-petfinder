@@ -1,19 +1,17 @@
 import {createSlice} from '@reduxjs/toolkit';
 import { login, register } from '../thunks/authThunks';
-import { getExpirationToken, getToken, setExpirationToken } from '../../utils/expirationToken';
+import { getAuthToken } from '../../utils/expirationToken';
 import { Profile, User } from '../../interfaces/AuthInterfaces';
 
 interface AuthState {
   token: string;
-  expiration: string | null;
   isLoading: boolean;
   user: User | null;
   profile: Profile | null;
 }
 
 const initialState: AuthState = {
-  token: getToken(),
-  expiration: getExpirationToken(),
+  token: getAuthToken(),
   isLoading: false,
   user: null,
   profile: null,
@@ -25,8 +23,7 @@ export const authSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder.addCase(login.fulfilled, (state, action) => {
-      state.token = action.payload!.token || '';
-      state.expiration = setExpirationToken(action.payload?.token || '');
+      state.token = action.payload!.token;
       state.isLoading = false;
     });
     builder.addCase(login.rejected, (state) => {
@@ -40,7 +37,6 @@ export const authSlice = createSlice({
       state.user = action.payload!.user;
       state.profile = action.payload!.profile;
       state.token = action.payload!.token;
-      state.expiration = setExpirationToken(action.payload!.token);
       state.isLoading = false;
     });
     builder.addCase(register.rejected, (state) => {

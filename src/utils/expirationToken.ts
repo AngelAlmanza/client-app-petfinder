@@ -1,41 +1,19 @@
 import moment from "moment";
 
-export const setExpirationToken = (token: string): string => {
-  const expirationDate = moment().add(20, "days").toDate();
-  localStorage.setItem("token", token);
-  localStorage.setItem("expirationDate", expirationDate.toISOString());
-  return expirationDate.toISOString();
-}
+export const setAuthToken = (token: string): void => {
+  console.log(token)
+  document.cookie = `token=${token}; expires=${moment().add(20, "days").toDate()}; path=/; Secure; SameSite=Strict`;
+};
 
-export const getExpirationToken = (): string | null => {
-  const expirationDate = localStorage.getItem("expirationDate");
-  if (!expirationDate) {
-    return null;
+export const getAuthToken = (): string => {
+  const ex = new RegExp('(^| )token=([^;]+)');
+  const match = document.cookie.match(ex)
+  if (match) {
+    return match[2];
   }
-  return expirationDate;
-}
+  return "";
+};
 
-export const removeExpirationToken = (): void => {
-  localStorage.removeItem("token");
-  localStorage.removeItem("expirationDate");
-}
-
-export const isTokenExpired = (): boolean => {
-  const expirationDate = getExpirationToken();
-  if (!expirationDate) {
-    return true;
-  }
-  return moment().isAfter(expirationDate);
-}
-
-export const getToken = (): string => {
-  const token = localStorage.getItem("token");
-  if (!token) {
-    return "";
-  }
-  if (isTokenExpired()) {
-    removeExpirationToken();
-    return "";
-  }
-  return token;
-}
+export const removeAuthToken = (): void => {
+  document.cookie = `token=; expires=${moment().subtract(5, "days").toDate()}; path=/; Secure; SameSite=Strict`;
+};
