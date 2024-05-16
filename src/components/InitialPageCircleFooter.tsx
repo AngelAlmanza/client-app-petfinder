@@ -4,9 +4,10 @@ import { SpecialButton } from './buttons/SpecialButton';
 
 type Props = {
   onSubmit: () => void
+  isSubmitting: boolean
 }
 
-export const InitialPageCircleFooter = ({ onSubmit }: Props) => {
+export const InitialPageCircleFooter = ({ onSubmit, isSubmitting }: Props) => {
   const [screenSize, setScreenSize] = useState(window.innerWidth)
 
   useEffect(() => {
@@ -23,13 +24,13 @@ export const InitialPageCircleFooter = ({ onSubmit }: Props) => {
 
   return (
     <div
-      className={`bg-white rounded-full flex flex-col items-center pt-10 md:-mx-28 md:pt-16 md:mt-20 `}
+      className="bg-white rounded-full flex flex-col items-center pt-10 -ml-4 md:-mx-28 md:pt-16 md:mt-20"
       style={{
         width: screenSize,
         height: screenSize,
       }}>
         <div className="w-100 md:mt-6">
-          <SpecialButton text="Iniciar Sesión" onClick={onSubmit} />
+          <SpecialButton text="Iniciar Sesión" onClick={onSubmit} isSubmitting={isSubmitting} type="submit" />
         </div>
         <div className="w-44 flex justify-center">
           <img className="w-100 h-fit object-cover mt-4 md:w-20" src={heartSignIn} alt="Love Pets Heart" />

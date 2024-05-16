@@ -1,7 +1,6 @@
 import moment from "moment";
 
 export const setAuthToken = (token: string): void => {
-  console.log(token)
   document.cookie = `token=${token}; expires=${moment().add(20, "days").toDate()}; path=/; Secure; SameSite=Strict`;
 };
 

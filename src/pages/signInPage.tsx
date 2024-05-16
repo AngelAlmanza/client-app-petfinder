@@ -3,25 +3,18 @@ import { TextInput } from "../components/inputs/TextInput"
 import dogAndCat from "../assets/images/dog-and-cat-banner.png"
 import dogBanner from "../assets/images/dog-banner.jpg"
 import birdBanner from "../assets/images/bird-banner.jpg"
-import { useForm } from "../hooks/useForm"
 import { useAppDispatch, useAppSelector } from "../store/hooks"
 import { login } from "../store/thunks/authThunks"
 import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
+import { Formik } from "formik"
+import { isValidEmail, isValidPassword } from "../utils/validatiors"
+import { ERROR_MESSAGES } from "../constants/errorsMessages"
 
 export const SignInPage = () => {
   const dispatch = useAppDispatch();
   const token = useAppSelector(state => state.auth.token);
   const navigate = useNavigate();
-
-  const { email, password, onChange } = useForm({
-    email: '',
-    password: '',
-  });
-
-  const onSubmit = () => {
-    dispatch(login({ email, password }))
-  };
 
   useEffect(() => {
     if (token.length > 0) {
@@ -39,23 +32,60 @@ export const SignInPage = () => {
             <h1 className="text-center text-white text-4xl font-normal">PetFinder</h1>
             <img src={dogAndCat} alt="PetFinder Logo" className="-mt-14 md:-mt-14" />
           </div>
-          <div className="w-100 -mt-16 h-36 flex flex-col justify-evenly items-center md:w-200 ">
-            <TextInput
-              placeholder="Correo Electronico"
-              iconName="email"
-              onChange={(value) => onChange('email', value)}
-            />
-            <TextInput
-              placeholder="Contraseña"
-              iconName="password"
-              onChange={(value) => onChange('password', value)}
-            />
-          </div>
-          <div className="w-100 mb-4 mt-2">
-            <p className="text-sm md:text-2xl text-center text-white font-medium">Rescata, adopta, ama: ¡Un gesto que transforma vidas!</p>
-          </div>
+          <Formik
+            initialValues={{ email: '', password: '' }}
+            validate={(values) => {
+              const errors: Record<string, string> = {};
+              if (!isValidEmail(values.email)) {
+                errors.email = ERROR_MESSAGES.INVALID_EMAIL;
+              }
+              if (!isValidPassword(values.password)) {
+                errors.password = ERROR_MESSAGES.INVALID_PASSWORD;
+              }
+              return errors;
+            }}
+            onSubmit={(values, { setSubmitting }) => {
+              dispatch(login({
+                email: values.email,
+                password: values.password
+              }));
+              setSubmitting(false);
+            }}
+          >
+            {({
+              values,
+              errors,
+              handleChange,
+              handleSubmit,
+              isSubmitting,
+            }) => (
+              <>
+                <form className="w-100 -mt-16 h-36 flex flex-col justify-evenly items-center md:w-200 ">
+                  <TextInput
+                    name="email"
+                    value={values.email}
+                    placeholder="Correo Electronico"
+                    iconName="email"
+                    onChange={handleChange}
+                  />
+                  {errors.email ? <p className="text-red-500 text-sm">{errors.email}</p> : null}
+                  <TextInput
+                    name="password"
+                    value={values.password}
+                    placeholder="Contraseña"
+                    iconName="password"
+                    onChange={handleChange}
+                  />
+                  {errors.password ? <p className="text-red-500 text-sm">{errors.password}</p> : null}
+                </form>
+                <div className="w-100 mb-4 mt-2">
+                  <p className="text-sm md:text-2xl text-center text-white font-medium">Rescata, adopta, ama: ¡Un gesto que transforma vidas!</p>
+                </div>
+                <InitialPageCircleFooter onSubmit={handleSubmit} isSubmitting={isSubmitting} />
+              </>
+            )}
+          </Formik>
         </div>
-        <InitialPageCircleFooter onSubmit={onSubmit} />
       </div>
       <div className="bg-white">
         <h2 className="text-center text-base md:text-xl font-bold my-4 text-text-primary-color">¿Perdiste a tu mascota?</h2>
