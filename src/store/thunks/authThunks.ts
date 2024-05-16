@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse } from "../../interfaces/AuthInterfaces";
 import { petFinderApi } from "../../api/petFinderApi";
-import { setAuthToken } from "../../utils/expirationToken";
+import { removeAuthToken, setAuthToken } from "../../utils/expirationToken";
 
 export const login = createAsyncThunk(
   'auth/login',
@@ -25,6 +25,19 @@ export const register = createAsyncThunk(
       const response = await petFinderApi.post<RegisterResponse>('/register', payload);
       setAuthToken(response.data.token);
       return response.data;
+    } catch (error) {
+      console.error(error);
+      thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const logout = createAsyncThunk(
+  'auth/logout',
+  async (_, thunkAPI) => {
+    try {
+      await petFinderApi.post('/logout');
+      removeAuthToken();
     } catch (error) {
       console.error(error);
       thunkAPI.rejectWithValue(error);

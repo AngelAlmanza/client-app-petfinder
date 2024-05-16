@@ -4,6 +4,9 @@ import dogAndCatBanner from '../../assets/images/dog-and-cat-banner.png'
 import { TextInput } from '../../components/inputs/TextInput'
 import { menuRoutes } from "../../constants/menuRoutes"
 import { NavLink } from "react-router-dom"
+import { useAppDispatch } from "../../store/hooks"
+import { PrivateRoutes } from "../../constants/routes"
+import { logout } from "../../store/thunks/authThunks"
 
 type Props = {
   handleMenu: () => void
@@ -11,6 +14,7 @@ type Props = {
 }
 
 export const Header = ({ openMenu, handleMenu }: Props) => {
+  const dispatch = useAppDispatch();
 
   return (
     <header className='w-100 px-6 pt-3 pb-1 flex justify-between items-center'>
@@ -34,6 +38,11 @@ export const Header = ({ openMenu, handleMenu }: Props) => {
                       <NavLink
                         to={route.path}
                         className="w-full flex items-center px-6 py-2 text-text-primary-color hover:text-primary-color hover:bg-hover-bg transition"
+                        onClick={() => {
+                          if (route.path === PrivateRoutes.LOGOUT_PAGE) {
+                            dispatch(logout());
+                          }
+                        }}
                       >
                         <FontAwesomeIcon icon={route.icon} className="mr-1" />
                         <span>{route.name}</span>

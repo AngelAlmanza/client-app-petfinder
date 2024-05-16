@@ -45,7 +45,7 @@ export const menuRoutes: MenuRoute[] = [
     icon: faShieldCat
   },
   {
-    path: PrivateRoutes.HOME_PAGE,
+    path: PrivateRoutes.LOGOUT_PAGE,
     name: 'Cerrar sesión',
     icon: faRightFromBracket
   }
