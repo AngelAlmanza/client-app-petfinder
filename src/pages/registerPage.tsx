@@ -81,7 +81,6 @@ export const RegisterPage = () => {
                                         />
                                         {errors.password ? <p className="text-red-500 text-sm">{errors.password}</p> : null}
                                     </div>
-                                    {JSON.stringify(values, null, 2)}
                                     <ul className="w-fit mx-auto mb-4 md:mt-32 lg:mt-6">
                                         {
                                             passwordRules.map((rule, index) => (

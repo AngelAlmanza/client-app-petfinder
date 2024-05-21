@@ -6,10 +6,11 @@ import birdBanner from "../assets/images/bird-banner.jpg"
 import { useAppDispatch, useAppSelector } from "../store/hooks"
 import { login } from "../store/thunks/authThunks"
 import { useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { Formik } from "formik"
 import { isValidEmail, isValidPassword } from "../utils/validatiors"
 import { ERROR_MESSAGES } from "../constants/errorsMessages"
+import { PublicRoutes } from "../constants/routes"
 
 export const SignInPage = () => {
   const dispatch = useAppDispatch();
@@ -80,6 +81,7 @@ export const SignInPage = () => {
                     {errors.password ? <p className="text-red-500 text-sm">{errors.password}</p> : null}
                 </form>
                   <div className="w-100 mb-4 mt-2">
+                    <Link to={PublicRoutes.REGISTER_PAGE} className="block text-white hover:text-aux-color text-center text-sm md:text-2xl font-medium mb-2">¿No tienes cuenta? Registrate</Link>
                     <p className="text-sm md:text-2xl text-center text-white font-medium">Rescata, adopta, ama: ¡Un gesto que transforma vidas!</p>
                   </div>
                   <InitialPageCircleFooter onSubmit={handleSubmit} isSubmitting={isSubmitting} />
