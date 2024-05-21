@@ -30,7 +30,7 @@ export const TextInput = ({ name, value, placeholder, iconName, className, style
       <input
         name={name}
         value={value}
-        className={`w-full bg-white px-4 py-3 outline-none rounded-3xl pr-10 text-sm md:text-lg font-medium  ${className}`}
+        className={`w-full bg-white px-4 py-3 outline-none rounded-3xl pr-10 text-sm md:text-lg font-medium ${className}`}
         type={inputType}
         placeholder={placeholder}
         style={style}

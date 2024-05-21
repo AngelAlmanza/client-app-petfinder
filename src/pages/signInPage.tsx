@@ -24,15 +24,16 @@ export const SignInPage = () => {
 
   return (
     <>
-      <div
-        className="w-screen h-screen pt-10 min-h-screen gradient-background overflow-hidden md:px-28  "
-      >
-        <div className="px-4 w-100">
-          <div className="w-full flex justify-center items-center flex-col">
-            <h1 className="text-center text-white text-4xl font-normal">PetFinder</h1>
-            <img src={dogAndCat} alt="PetFinder Logo" className="-mt-14 md:-mt-14" />
-          </div>
-          <Formik
+      <div className="lg:flex flex-grow-0 ">
+        <div
+          className="w-screen h-screen pt-10 min-h-screen gradient-background overflow-hidden md:px-28    "
+        >
+          <div className="px-4 w-100 lg:w-full">
+            <div className="w-full flex justify-center items-center flex-col">
+              <h1 className="text-center text-white text-4xl font-bold lg:-mt-8">PetFinder</h1>
+              <img src={dogAndCat} alt="PetFinder Logo" className="-mt-14 md:-mt-14 lg:-mt-14" />
+            </div>
+            <Formik
             initialValues={{ email: '', password: '' }}
             validate={(values) => {
               const errors: Record<string, string> = {};
@@ -60,49 +61,50 @@ export const SignInPage = () => {
               isSubmitting,
             }) => (
               <>
-                <form className="w-100 -mt-16 h-36 flex flex-col justify-evenly items-center md:w-200 ">
-                  <TextInput
-                    name="email"
+                <form className="w-100 -mt-16 h-36 flex flex-col justify-evenly items-center md:w-200 lg:-mt-18">
+                    <TextInput
+                      name="email"
                     value={values.email}
                     placeholder="Correo Electronico"
-                    iconName="email"
-                    onChange={handleChange}
-                  />
-                  {errors.email ? <p className="text-red-500 text-sm">{errors.email}</p> : null}
+                      iconName="email"
+                      onChange={handleChange}
+                    />
+                    {errors.email ? <p className="text-red-500 text-sm">{errors.email}</p> : null}
                   <TextInput
-                    name="password"
+                      name="password"
                     value={values.password}
                     placeholder="Contraseña"
-                    iconName="password"
-                    onChange={handleChange}
-                  />
-                  {errors.password ? <p className="text-red-500 text-sm">{errors.password}</p> : null}
+                      iconName="password"
+                      onChange={handleChange}
+                    />
+                    {errors.password ? <p className="text-red-500 text-sm">{errors.password}</p> : null}
                 </form>
-                <div className="w-100 mb-4 mt-2">
-                  <p className="text-sm md:text-2xl text-center text-white font-medium">Rescata, adopta, ama: ¡Un gesto que transforma vidas!</p>
-                </div>
-                <InitialPageCircleFooter onSubmit={handleSubmit} isSubmitting={isSubmitting} />
+                  <div className="w-100 mb-4 mt-2">
+                    <p className="text-sm md:text-2xl text-center text-white font-medium">Rescata, adopta, ama: ¡Un gesto que transforma vidas!</p>
+                  </div>
+                  <InitialPageCircleFooter onSubmit={handleSubmit} isSubmitting={isSubmitting} />
               </>
             )}
           </Formik>
         </div>
-      </div>
-      <div className="bg-white">
-        <h2 className="text-center text-base md:text-xl font-bold my-4 text-text-primary-color">¿Perdiste a tu mascota?</h2>
-        <p className="text-base md:text-lg font-normal text-justify text-text-primary-color px-10">
-          ¡Lo entendemos! perder a tu compañero puede ser angustiante,
-          pero estamos aquí para ayudarte a reunirte lo antes posible.
-          Utiliza nuestro apartado de <b>mascotas perdidas</b> para aumentar
-          las posibilidades de encontrar a tu amigo de vida.
-        </p>
-        <img src={dogBanner} alt="Dog banner" className="w-100 object-cover mt-4" />
-        <h2 className="text-center text-base md:text-xl font-bold my-4 text-text-primary-color">Encuentra a tu compañero ideal</h2>
-        <p className="text-base font-normal md:text-lg text-justify text-text-primary-color px-10">
-          ¿Estás buscando sumar un nuevo miembro a tu familia?
-          ¡Nuestro servicio de adopción de mascotas te ayuda a encontrar el compañero
-          perfecto que se adapte a tu estilo de vida y personalidad!
-        </p>
-        <img src={birdBanner} alt="Dog banner" className="w-100 object-cover mt-4" />
+          </div>
+        <div className="bg-white lg:w-full lg:rounded-lg">
+          <h2 className="text-center text-base md:text-xl font-bold my-4 text-text-primary-color ">¿Perdiste a tu mascota?</h2>
+          <p className="text-base md:text-lg font-normal text-justify text-text-primary-color px-10">
+            ¡Lo entendemos! perder a tu compañero puede ser angustiante,
+            pero estamos aquí para ayudarte a reunirte lo antes posible.
+            Utiliza nuestro apartado de <b>mascotas perdidas</b> para aumentar
+            las posibilidades de encontrar a tu amigo de vida.
+          </p>
+          <img src={dogBanner} alt="Dog banner" className="w-100 object-cover mt-4" />
+          <h2 className="text-center text-base md:text-xl font-bold my-4 text-text-primary-color lg:hidden">Encuentra a tu compañero ideal</h2>
+          <p className="text-base font-normal md:text-lg text-justify text-text-primary-color px-10 lg:hidden">
+            ¿Estás buscando sumar un nuevo miembro a tu familia?
+            ¡Nuestro servicio de adopción de mascotas te ayuda a encontrar el compañero
+            perfecto que se adapte a tu estilo de vida y personalidad!
+          </p>
+          <img src={birdBanner} alt="Dog banner" className="w-100 object-cover mt-4 lg:hidden" />
+        </div>
       </div>
       <div className="bg-black flex justify-center items-center py-2">
         <img src={dogAndCat} alt="PetFinder Logo" className="w-8 rounded-full md:w-16 md:-mt-4 " />
