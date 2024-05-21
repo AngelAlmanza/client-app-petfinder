@@ -1,12 +1,21 @@
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEllipsis, faFlag, faPaw, faLocationDot, faPhone, faArrowLeft } from "@fortawesome/free-solid-svg-icons"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PostTag } from "../components/PostTag";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { getPostById } from "../store/thunks/postThunks";
+import { getTypeByValue } from "../utils/getTypeByValue";
+import { getAnimaltypeByValue } from "../utils/getAnimaltypeByValue";
+import { setCurrentPost } from "../store/slices/postSlice";
 
 export const PostDetailsPage = () => {
   const [opacityButton, setOpacityButton] = useState<string>('opacity-0');
+  const { currentPost } = useAppSelector(state => state.posts);
+  const { id } = useParams();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const hideButton = () => {
     if (opacityButton === 'opacity-0') {
@@ -17,25 +26,25 @@ export const PostDetailsPage = () => {
   };
 
   const onBack = () => {
+    dispatch(setCurrentPost(null));
     navigate(-1);
   }
+
+  useEffect(() => {
+    dispatch(getPostById(id!.toString()))
+  }, [id, dispatch]);
 
   return (
     <>
       <section className="w-full h-72 relative md:px-20">
         <img src="https://via.placeholder.com/150" className="w-full h-full object-cover rounded-lg" />
-        <div className="w-100 h-4 flex justify-center items-center gap-2 absolute bottom-8 left-1/2 -translate-x-1/2">
-          <span className="w-2 h-2 rounded-full bg-blue-500"></span>
-          <span className="w-2 h-2 rounded-full bg-blue-500"></span>
-          <span className="w-2 h-2 rounded-full bg-blue-500"></span>
-        </div>
         <span
           className="w-3/4 md:w-3/5 inline-flex justify-between items-center rounded-2xl py-1 px-3
           bg-red-500 font-bold text-white uppercase text-xl md:text-2xl absolute bottom-0
             left-1/2 -translate-x-1/2 translate-y-1/2"
         >
           <FontAwesomeIcon icon={faPaw} size="2x" className="text-white text-xs md:text-lg " />
-          dante
+          { currentPost?.pet.name }
           <FontAwesomeIcon icon={faPaw} size="2x" className="text-white text-xs md:text-lg " />
         </span>
       </section>
@@ -46,8 +55,8 @@ export const PostDetailsPage = () => {
             <img className="w-full h-full" src="https://via.placeholder.com/150" />
           </div>
           <div>
-            <p className="text-lg md:text-2xl line-clamp-1 text-primary-color font-bold">Nombre de Usuario</p>
-            <p className="text-sm md:text-lg line-clamp-1 text-text-primary-color font-medium">Nombre de la ciudad</p>
+            <p className="text-lg md:text-2xl line-clamp-1 text-primary-color font-bold">{ currentPost?.user.profile.name }</p>
+            <p className="text-sm md:text-lg line-clamp-1 text-text-primary-color font-medium">{ currentPost?.title }</p>
           </div>
         </div>
         <button onClick={hideButton} className="w-1/4 flex justify-end items-start pr-4">
@@ -64,10 +73,8 @@ export const PostDetailsPage = () => {
       <section>
         <h4 className="my-4 text-primary-color font-bold text-lg md:text-2xl md:px-14">Etiquetas</h4>
         <div className="flex items-center justify-center flex-wrap gap-1">
-          <PostTag text="Perro" color="primary-color" />
-          <PostTag text="Perro" color="primary-color" />
-          <PostTag text="Perro" color="primary-color" />
-          <PostTag text="Perro" color="primary-color" />
+          <PostTag text={getTypeByValue(currentPost?.type!)} color="primary-color" />
+          <PostTag text={getAnimaltypeByValue(currentPost?.pet.type!)} color="primary-color" />
         </div>
       </section>
 
@@ -75,14 +82,14 @@ export const PostDetailsPage = () => {
         <h4 className="my-4 text-primary-color font-bold text-lg md:text-2xl md:px-14 ">Visto por última vez en:</h4>
         <p className="text-sm md:text-lg text-text-primary-color font-medium md:px-14">
           <FontAwesomeIcon icon={faLocationDot} className="text-danger-color mr-1" />
-          Aquí se coloca la ubicación donde indicó el usuario que se perdió la mascota.
+          { currentPost?.location }
         </p>
       </section>
 
       <section>
         <h4 className="my-4 text-primary-color font-bold text-lg md:text-2xl md:px-14">Detalles</h4>
         <p className="text-sm md:text-lg text-text-primary-color font-medium md:px-14">
-          Descripción de los detalles que proporcionó el usuario al crear la publicación.
+          { currentPost?.content }
         </p>
       </section>
 

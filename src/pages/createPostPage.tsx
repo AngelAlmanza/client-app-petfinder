@@ -5,13 +5,15 @@ import { Formik } from "formik"
 import { isValidRace, isValidDetails, isValidAddress, isValidPetName } from "../utils/validatiors";
 import { ERROR_MESSAGES } from "../constants/errorsMessages";
 import { Select } from "../components/inputs/Select"
-import { PublicationTypes, publicationTypesList } from "../constants/publicationTypes"
+import { publicationTypesList } from "../constants/publicationTypes"
 import { ImageInput } from "../components/inputs/ImageInput"
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { PrivateRoutes } from "../constants/routes";
-import { AnimalTypes, animalTypesList } from '../constants/animalTypes';
+import { animalTypesList } from '../constants/animalTypes';
+import { PublicationTypes } from "../enums/publicationTypes";
+import { AnimalTypes } from "../enums/animalTypes";
 
 export const CreatePostPage = () => {
   const dispatch = useAppDispatch();

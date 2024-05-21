@@ -1,11 +1,12 @@
-import { faEllipsis, faUser, faFlag } from "@fortawesome/free-solid-svg-icons";
+import { faEllipsis, faFlag, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ReactNode, useState } from "react";
-import { PostButton } from "./buttons/PostButton";
 import { Link } from "react-router-dom";
 import { PrivateRoutes } from '../constants/routes';
+import { PostButton } from "./buttons/PostButton";
 
 type Props = {
+  id: number,
   username: string,
   description: string,
   postImage?: string,
@@ -14,7 +15,7 @@ type Props = {
   styles?: React.CSSProperties
 }
 
-export const PetPost = ({ username, description, postImage, altImage, buttonByPublish, styles }: Props) => {
+export const PetPost = ({ id, username, description, postImage, altImage, buttonByPublish, styles }: Props) => {
   const [opacityButton, setOpacityButton] = useState<string>('opacity-0');
 
   const hideButton = () => {
@@ -28,7 +29,7 @@ export const PetPost = ({ username, description, postImage, altImage, buttonByPu
   return (
     <Link
       className="w-full rounded-2xl bg-white shadow p-1 flex flex-col no-underline md:px-10 md:max-w-2xl md:ml-7"
-      to={PrivateRoutes.POST_DETAILS_PAGE}
+      to={`${PrivateRoutes.POST_DETAILS_PAGE}/${id}`}
       style={styles}
     >
       {

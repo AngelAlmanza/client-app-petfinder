@@ -22,7 +22,7 @@ export const PrivateRoutes = () => {
     <MainLayout>
       <Routes>
         <Route path={PrivateRoutesEnum.HOME_PAGE} element={<HomePage />} />
-        <Route path={PrivateRoutesEnum.POST_DETAILS_PAGE} element={<PostDetailsPage />} />
+        <Route path={`${PrivateRoutesEnum.POST_DETAILS_PAGE}/:id`} element={<PostDetailsPage />} />
         <Route path={PrivateRoutesEnum.CREATE_POST_PAGE} element={<CreatePostPage />} />
         <Route path={PrivateRoutesEnum.MESSENGER_PAGE} element={<MessagerPage />} />
         <Route path={PrivateRoutesEnum.EDIT_PROFILE_PAGE} element={<EditporfilePage />} />

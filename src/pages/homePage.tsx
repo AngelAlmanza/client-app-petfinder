@@ -24,10 +24,11 @@ export const HomePage = () => {
           posts.map(post => (
             <PetPost
               key={post.id}
+              id={post.id}
               buttonByPublish={<PostButton onClick={() => {}} type="lost" />}
-              username="Username"
+              username={post.user.profile.name}
               postImage="https://via.placeholder.com/150"
-              altImage="Post image"
+              altImage={`${post.title} post image`}
               description={post.content}
             />
           ))

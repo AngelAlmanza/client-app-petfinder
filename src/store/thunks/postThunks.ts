@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { petFinderApi } from "../../api/petFinderApi";
-import { CreatePostResponse, GetAllPostResponse, StorePostRequest } from "../../interfaces/PostInterfaces";
+import { CreatePostResponse, GetAllPostResponse, GetPostResponse, StorePostRequest } from "../../interfaces/PostInterfaces";
 
 export const createPost = createAsyncThunk(
   'post/createPost',
@@ -34,8 +34,9 @@ export const getPostById = createAsyncThunk(
   'post/getPostById',
   async (postId: string, thunkAPI) => {
     try {
-      const response = await petFinderApi.get<GetAllPostResponse>(`/posts/${postId}`);
-      return response.data.posts.data;
+      const response = await petFinderApi.get<GetPostResponse>(`/posts/${postId}`);
+      console.log(response.data.post)
+      return response.data.post;
     } catch (error) {
       console.error(error);
       thunkAPI.rejectWithValue(error);
