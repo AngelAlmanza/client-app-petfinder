@@ -1,9 +1,10 @@
 export const ERROR_MESSAGES = {
   INVALID_EMAIL: 'Correo inválido',
   INVALID_PASSWORD: 'Contraseña inválida',
-  INVALID_TYPEANIMAL: 'Ingrese el tipo de mascota',
-  INVALID_RAZA: 'Ingrese raza de mascota',
-  INVALID_PETNAME: 'Ingrese nombre de mascota',
-  INVALID_ADDRESS: 'Ingrese direccion',
-  INVALID_PETDETAILS: 'Ingrese detalles de mascota',
+  INVALID_TYPE_ANIMAL: 'Tipo de mascota inválido',
+  INVALID_BREED: 'Raza inválida',
+  INVALID_PETNAME: 'Nombre de mascota inválido',
+  INVALID_ADDRESS: 'Dirección inválida',
+  INVALID_PET_DETAILS: 'Detalles inválidos',
+  INVALID_POST_TYPE: 'Tipo de publicación inválido',
 };

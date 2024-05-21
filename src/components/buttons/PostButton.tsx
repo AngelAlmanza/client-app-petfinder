@@ -39,13 +39,14 @@ type Props = {
   onClick: () => void
 }
 
-export const PostButton = ({ type, text, styles }: Props) => {
+export const PostButton = ({ type, text, styles, onClick }: Props) => {
   const config = ButtonPostConfig[type]
 
   return (
     <button
       className={` min-w-20 flex justify-center items-center py-1 px-2 rounded-xl bg-${config.color}`}
       style={styles}
+      onClick={onClick}
     >
       {
         config.icon && <FontAwesomeIcon icon={config.icon} className="text-white" />

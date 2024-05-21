@@ -1,107 +1,161 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faImage } from "@fortawesome/free-solid-svg-icons"
 import { PostTextInput } from "../components/inputs/PostTextInput"
-import { useForm } from "../hooks/useForm"
 import { useAppDispatch } from "../store/hooks"
 import { createPost } from "../store/thunks/postThunks"
 import { Formik } from "formik"
-import { isValidPetType, isValidRace, isValidDetails, isValidAddress, isValidPetName } from "../utils/validatiors";
+import { isValidRace, isValidDetails, isValidAddress, isValidPetName } from "../utils/validatiors";
 import { ERROR_MESSAGES } from "../constants/errorsMessages";
+import { Select } from "../components/inputs/Select"
+import { PublicationTypes, publicationTypesList } from "../constants/publicationTypes"
+import { ImageInput } from "../components/inputs/ImageInput"
+import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+import { PrivateRoutes } from "../constants/routes";
+import { AnimalTypes, animalTypesList } from '../constants/animalTypes';
 
 export const CreatePostPage = () => {
   const dispatch = useAppDispatch();
+  const [imgBase64, setImgBase64] = useState<string>('');
+  const navigate = useNavigate();
 
-  const { name, type, breed, age, personality, title, content, location, onChange } = useForm({
-    name: '',
-    type: '',
-    breed: '',
-    age: '2',
-    personality: 'Happy',
-    title: 'Post prueba',
-    content: '',
-    location: '',
-  });
+  const handleUploadImage = (data: string) => {
+    setImgBase64(data);
+  }
 
-  const handleCreatePost = () => {
-    dispatch(createPost({
-      pet: {
-        name,
-        type,
-        breed,
-        age,
-        personality,
-      },
-      post: {
-        title,
-        content,
-        location,
-        type: 'lost',
-      },
-    }));
-  };
+  useEffect(() => {
+    console.log(imgBase64)
+  }, [imgBase64])
+
   return (
     <>
       <Formik
-        initialValues={{ animaltype: "", race: "", petname: "", address: "", details: "", }}
+        initialValues={{
+          petname: '',
+          animalType: '',
+          breed: '',
+          age: '',
+          personality: '',
+          title: '',
+          content: '',
+          typePost: PublicationTypes.DEFAULT,
+          location: '',
+          image: '',
+        }}
         validate={(values) => {
-          console.log(values)
           const errors: Record<string, string> = {};
-          if (!isValidPetType(values.animaltype)) {
-            errors.typeanimal = ERROR_MESSAGES.INVALID_TYPEANIMAL;
-          }
-          if (!isValidRace(values.race)) {
-            errors.race = ERROR_MESSAGES.INVALID_RAZA;
+          if (!isValidRace(values.breed)) {
+            errors.race = ERROR_MESSAGES.INVALID_BREED;
           }
           if (!isValidPetName(values.petname)) {
             errors.petname = ERROR_MESSAGES.INVALID_PETNAME;
           }
-          if (!isValidAddress(values.address)) {
+          if (!isValidAddress(values.location)) {
             errors.address = ERROR_MESSAGES.INVALID_ADDRESS;
           }
-          if (!isValidDetails(values.details)) {
-            errors.details = ERROR_MESSAGES.INVALID_PETDETAILS;
+          if (!isValidDetails(values.content)) {
+            errors.details = ERROR_MESSAGES.INVALID_PET_DETAILS;
+          }
+          if (values.typePost === PublicationTypes.DEFAULT) {
+            errors.typePost = ERROR_MESSAGES.INVALID_POST_TYPE;
+          }
+          if (values.animalType === AnimalTypes.DEFAULT) {
+            errors.animalType = ERROR_MESSAGES.INVALID_TYPE_ANIMAL;
           }
 
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
+          dispatch(createPost({
+            pet: {
+              name: values.petname,
+              type: values.animalType,
+              breed: values.breed,
+              age: values.age.toString(),
+              personality: values.personality,
+            },
+            post: {
+              title: values.title,
+              content: values.content,
+              type: values.typePost,
+              location: values.location,
+            }
+          })).then(() => {
+            Swal.fire({
+              title: 'Publicación creada',
+              text: 'Tu publicación ha sido creada con éxito',
+              icon: 'success',
+              confirmButtonText: 'Aceptar',
+            }).then((value) => {
+              if (value.isConfirmed) {
+                navigate(PrivateRoutes.HOME_PAGE);
+              }
+            })
+          })
           setSubmitting(false);
         }}
       >{({
         values,
         errors,
         handleChange,
+        handleSubmit,
       }) => (
-        //formulario
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="w-full px-4">
             <h2 className="text-lg md:text-3xl font-medium text-text-primary-color text-center">¿Perdiste una mascota?</h2>
             <div className="h-px md:h-0.5 bg-primary-color w-full my-4" />
             <h4 className="text-sm md:text-xl font-medium text-center text-text-primary-color">¡La comunidad puede ayudarte a recuperarla!</h4>
           </div>
-          <div className="w-100 my-4 md:px-24">
-            <div className="w-100 h-52 md:h-60 mb-2 bg-gray-400 rounded-2xl flex justify-center items-center">
-              <FontAwesomeIcon icon={faImage} className="text-4xl text-text-primary-color" />
-            </div>
-            <p className="text-sm md:text-lg font-medium text-text-primary-color">Por lo que es necesario que proporciones los siguientes datos.</p>
-          </div>
+          <ImageInput name="image" value={values.image} onChange={handleChange} handleImageChangeBase64={handleUploadImage} />
           <div className="flex flex-wrap justify-center items-center md:px-24">
+            <p className="text-sm md:text-lg font-medium text-text-primary-color mb-4">Por lo que es necesario que proporciones los siguientes datos.</p>
             <PostTextInput
-              placeholder="Tipo de animal"
-              name="animaltype"
-              value={values.animaltype}
+              placeholder="Título de tu publicación"
+              name="title"
+              value={values.title}
+              onChange={handleChange}
+            />
+            {errors.title ? <p className="text-red-500 text-sm">{errors.title}</p> : null}
+            <PostTextInput
+              placeholder="Personalidad de la mascota"
+              name="personality"
+              value={values.personality}
+              onChange={handleChange}
+            />
+            <Select
+              data={publicationTypesList}
+              label="Tipo de publicación"
+              name="typePost"
+              id="typePost"
+              value={values.typePost}
+              onChange={handleChange}
+            />
+            {errors.typePost ? <p className="text-red-500 text-sm">{errors.typePost}</p> : null}
+            {errors.personality ? <p className="text-red-500 text-sm">{errors.personality}</p> : null}
+            <Select
+              data={animalTypesList}
+              label="Tipo de animal"
+              name="animalType"
+              id="animalType"
+              value={values.animalType}
+              onChange={handleChange}
+            />
+            <PostTextInput
+              placeholder="Edad de la mascota"
+              name="age"
+              value={values.age}
+              type="number"
               onChange={handleChange}
               style={{ width: 'calc(50% - 8px)', marginRight: '8px' }}
             />
-            {errors.animaltype ? <p className="text-red-500 text-sm">{errors.animaltype}</p> : null}
+            {errors.age ? <p className="text-red-500 text-sm">{errors.age}</p> : null}
             <PostTextInput
-              name="race"
+              name="breed"
               placeholder="Raza"
-              value={values.race}
-              onChange={(value) => onChange('breed', value)}
+              value={values.breed}
+              onChange={handleChange}
               style={{ width: 'calc(50% - 8px)', marginLeft: '8px' }}
             />
-            {errors.race ? <p className="text-red-500 text-sm">{errors.race}</p> : null}
+            {errors.breed ? <p className="text-red-500 text-sm">{errors.breed}</p> : null}
             <PostTextInput
               name="petname"
               placeholder="Nombre de la mascota"
@@ -110,24 +164,30 @@ export const CreatePostPage = () => {
             />
             {errors.petname ? <p className="text-red-500 text-sm">{errors.petname}</p> : null}
             <PostTextInput
-              name="address"
+              name="location"
               placeholder="Ubicación donde se perdió"
-              value={values.address}
+              value={values.location}
               onChange={handleChange}
             />
-            {errors.address ? <p className="text-red-500 text-sm">{errors.address}</p> : null}
+            {errors.location ? <p className="text-red-500 text-sm">{errors.location}</p> : null}
             <PostTextInput
-              name="details"
+              name="content"
               placeholder="Detalles extra (color, raza, tamaño, etc.)"
-              value={values.details}
+              value={values.content}
               onChange={handleChange}
             />
-            {errors.details ? <p className="text-red-500 text-sm">{errors.details}</p> : null}
+            {errors.content ? <p className="text-red-500 text-sm">{errors.content}</p> : null}
           </div>
           <div className="w-full my-4 flex justify-evenly items-center md:px-6">
-            <button className="w-1/3 bg-danger-color text-white text-sm md:text-2xl font-medium py-3 rounded-3xl mt-4">Cancelar</button>
             <button
-              onClick={handleCreatePost}
+              type="button"
+              className="w-1/3 bg-danger-color text-white text-sm md:text-2xl font-medium py-3 rounded-3xl mt-4"
+              onClick={() => navigate(PrivateRoutes.HOME_PAGE)}
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
               className="w-1/3 bg-primary-color text-white text-sm md:text-2xl font-medium py-3 rounded-3xl mt-4"
             >
               Publicar

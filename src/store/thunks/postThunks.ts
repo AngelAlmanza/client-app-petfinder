@@ -6,7 +6,9 @@ export const createPost = createAsyncThunk(
   'post/createPost',
   async (payload: StorePostRequest, thunkAPI) => {
     try {
+      console.log(payload);
       const response = await petFinderApi.post<CreatePostResponse>('/posts/create', payload);
+      console.log(response.data);
       return response.data;
     } catch (error) {
       console.error(error);

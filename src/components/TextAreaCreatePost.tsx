@@ -1,4 +1,6 @@
+import { useNavigate } from "react-router-dom"
 import { PostButton } from "./buttons/PostButton"
+import { PrivateRoutes } from "../constants/routes"
 
 type Props = {
   value: string
@@ -6,6 +8,8 @@ type Props = {
 }
 
 export const TextAreaCreatePost = ({ value, onChange }: Props) => {
+  const navigate = useNavigate();
+
   return (
     <div className="w-100 rounded-2xl shadow-sm bg-white h-fit">
       <textarea
@@ -17,7 +21,7 @@ export const TextAreaCreatePost = ({ value, onChange }: Props) => {
       />
       <div className="w-100 p-2 flex justify-end">
         <PostButton
-          onClick={() => {}}
+          onClick={() => navigate(PrivateRoutes.CREATE_POST_PAGE)}
           text="Publicar"
           type="more"
         />
