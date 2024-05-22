@@ -9,9 +9,11 @@ import { getPostById } from "../store/thunks/postThunks";
 import { getTypeByValue } from "../utils/getTypeByValue";
 import { getAnimaltypeByValue } from "../utils/getAnimaltypeByValue";
 import { setCurrentPost } from "../store/slices/postSlice";
+import { ReportModal } from "../components/ReportModal";
 
 export const PostDetailsPage = () => {
   const [opacityButton, setOpacityButton] = useState<string>('opacity-0');
+  const [openReportModal, setOpenReportModal] = useState<boolean>(false);
   const { currentPost } = useAppSelector(state => state.posts);
   const { id } = useParams();
   const navigate = useNavigate();
@@ -29,6 +31,13 @@ export const PostDetailsPage = () => {
     dispatch(setCurrentPost(null));
     navigate(-1);
   }
+
+  const handleReportModal = () => {
+    if (openReportModal) {
+      hideButton()
+    }
+    setOpenReportModal(!openReportModal);
+  };
 
   useEffect(() => {
     dispatch(getPostById(id!.toString()))
@@ -63,7 +72,10 @@ export const PostDetailsPage = () => {
           <FontAwesomeIcon icon={faEllipsis} className="text-text-primary-color text-xl md:text-2xl" />
         </button>
         <div className={`absolute -top-6 right-10 transition-all ${opacityButton}`} >
-          <button className="bg-primary-gray rounded-lg shadow-md py-2 px-4 flex items-center">
+          <button
+            className="bg-primary-gray rounded-lg shadow-md py-2 px-4 flex items-center"
+            onClick={handleReportModal}
+          >
             <FontAwesomeIcon icon={faFlag} className="text-danger-color text-xl" />
             <span className="inline-block ml-2 font-medium text-sm md:text-lg text-text-primary-color">Reportar</span>
           </button>
@@ -103,6 +115,8 @@ export const PostDetailsPage = () => {
           <span className="ml-2 text-sm md:text-3xl text-white font-semibold">Contactar</span>
         </button>
       </section>
+
+      <ReportModal open={openReportModal} handleClose={handleReportModal} />
     </>
   )
 }
