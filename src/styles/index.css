@@ -33,3 +33,9 @@
     opacity: 1;
   }
 }
+
+@media (min-width: 1024px) {
+  .gradient-background-lg {
+    background-image: linear-gradient(to bottom, #94d6cb, #7ccbc9, #64bfc8, #4cb3c7, #36a6c6);
+  }
+}
