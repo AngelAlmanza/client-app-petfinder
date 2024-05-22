@@ -9,6 +9,7 @@ import { menuRoutes } from "../../constants/menuRoutes"
 import { useForm } from "../../hooks/useForm"
 import { useAppDispatch } from "../../store/hooks"
 import { logout } from "../../store/thunks/authThunks"
+import { PrivateRoutes } from "../../constants/routes"
 
 type Props = {
   handleMenu: () => void
@@ -26,7 +27,8 @@ export const Header = ({ openMenu, handleMenu }: Props) => {
     onChange('search', event.target.value);
   }
 
-  const handleLogout = (e: MouseEvent<HTMLAnchorElement>) => {
+  const handleLogout = (e: MouseEvent<HTMLAnchorElement>, path: PrivateRoutes) => {
+    if (path !== PrivateRoutes.LOGOUT_PAGE) return
     e.preventDefault();
     Swal.fire({
       title: '¿Estás seguro de cerrar sesión?',
@@ -63,7 +65,7 @@ export const Header = ({ openMenu, handleMenu }: Props) => {
                       <NavLink
                         to={route.path}
                         className="w-full flex items-center px-6 py-2 text-text-primary-color hover:text-primary-color hover:bg-hover-bg transition"
-                        onClick={handleLogout}
+                        onClick={(event) => handleLogout(event, route.path)}
                       >
                         <FontAwesomeIcon icon={route.icon} className="mr-1" />
                         <span>{route.name}</span>
