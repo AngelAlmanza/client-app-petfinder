@@ -12,6 +12,8 @@ export interface PetRequest {
   breed:       string;
   age:         string;
   personality: string;
+  image:       string;
+  image_type:  string;
 }
 
 export interface PostRequest {

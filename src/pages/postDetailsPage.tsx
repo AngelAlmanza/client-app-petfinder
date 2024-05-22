@@ -49,7 +49,7 @@ export const PostDetailsPage = () => {
         <img src="https://via.placeholder.com/150" className="w-full h-full object-cover rounded-lg" />
         <span
           className="w-3/4 md:w-3/5 inline-flex justify-between items-center rounded-2xl py-1 px-3
-          bg-red-500 font-bold text-white uppercase text-xl md:text-2xl absolute bottom-0
+          bg-red-500 font-bold text-white uppercase text-xl text-center md:text-2xl absolute bottom-0
             left-1/2 -translate-x-1/2 translate-y-1/2"
         >
           <FontAwesomeIcon icon={faPaw} size="2x" className="text-white text-xs md:text-lg " />

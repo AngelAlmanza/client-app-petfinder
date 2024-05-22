@@ -1,19 +1,19 @@
-import { PostTextInput } from "../components/inputs/PostTextInput"
-import { useAppDispatch } from "../store/hooks"
-import { createPost } from "../store/thunks/postThunks"
-import { Formik } from "formik"
-import { isValidRace, isValidDetails, isValidAddress, isValidPetName } from "../utils/validatiors";
-import { ERROR_MESSAGES } from "../constants/errorsMessages";
-import { Select } from "../components/inputs/Select"
-import { publicationTypesList } from "../constants/publicationTypes"
-import { ImageInput } from "../components/inputs/ImageInput"
-import { useEffect, useState } from "react";
-import Swal from "sweetalert2";
+import { Formik } from "formik";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { PrivateRoutes } from "../constants/routes";
+import Swal from "sweetalert2";
+import { ImageInput } from "../components/inputs/ImageInput";
+import { PostTextInput } from "../components/inputs/PostTextInput";
+import { Select } from "../components/inputs/Select";
 import { animalTypesList } from '../constants/animalTypes';
-import { PublicationTypes } from "../enums/publicationTypes";
+import { ERROR_MESSAGES } from "../constants/errorsMessages";
+import { publicationTypesList } from "../constants/publicationTypes";
+import { PrivateRoutes } from "../constants/routes";
 import { AnimalTypes } from "../enums/animalTypes";
+import { PublicationTypes } from "../enums/publicationTypes";
+import { useAppDispatch } from "../store/hooks";
+import { createPost } from "../store/thunks/postThunks";
+import { isValidAddress, isValidDetails, isValidPetName, isValidRace } from "../utils/validatiors";
 
 export const CreatePostPage = () => {
   const dispatch = useAppDispatch();
@@ -23,10 +23,6 @@ export const CreatePostPage = () => {
   const handleUploadImage = (data: string) => {
     setImgBase64(data);
   }
-
-  useEffect(() => {
-    console.log(imgBase64)
-  }, [imgBase64])
 
   return (
     <>
@@ -70,10 +66,12 @@ export const CreatePostPage = () => {
           dispatch(createPost({
             pet: {
               name: values.petname,
-              type: values.animalType,
+              type: values.animalType as AnimalTypes,
               breed: values.breed,
               age: values.age.toString(),
               personality: values.personality,
+              image: imgBase64,
+              image_type: 'pet'
             },
             post: {
               title: values.title,
