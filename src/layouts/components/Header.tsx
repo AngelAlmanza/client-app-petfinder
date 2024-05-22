@@ -1,11 +1,13 @@
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { ChangeEvent, MouseEvent } from "react"
+import { NavLink } from "react-router-dom"
+import Swal from "sweetalert2"
 import dogAndCatBanner from '../../assets/images/dog-and-cat-banner.png'
 import { TextInput } from '../../components/inputs/TextInput'
 import { menuRoutes } from "../../constants/menuRoutes"
-import { NavLink } from "react-router-dom"
+import { useForm } from "../../hooks/useForm"
 import { useAppDispatch } from "../../store/hooks"
-import { PrivateRoutes } from "../../constants/routes"
 import { logout } from "../../store/thunks/authThunks"
 
 type Props = {
@@ -15,6 +17,29 @@ type Props = {
 
 export const Header = ({ openMenu, handleMenu }: Props) => {
   const dispatch = useAppDispatch();
+  const {
+    search,
+    onChange
+  } = useForm({ search: '' });
+
+  const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
+    onChange('search', event.target.value);
+  }
+
+  const handleLogout = (e: MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    Swal.fire({
+      title: '¿Estás seguro de cerrar sesión?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'No',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(logout());
+      }
+    })
+  };
 
   return (
     <header className='w-100 px-6 pt-3 pb-1 flex justify-between items-center'>
@@ -38,11 +63,7 @@ export const Header = ({ openMenu, handleMenu }: Props) => {
                       <NavLink
                         to={route.path}
                         className="w-full flex items-center px-6 py-2 text-text-primary-color hover:text-primary-color hover:bg-hover-bg transition"
-                        onClick={() => {
-                          if (route.path === PrivateRoutes.LOGOUT_PAGE) {
-                            dispatch(logout());
-                          }
-                        }}
+                        onClick={handleLogout}
                       >
                         <FontAwesomeIcon icon={route.icon} className="mr-1" />
                         <span>{route.name}</span>
@@ -55,7 +76,15 @@ export const Header = ({ openMenu, handleMenu }: Props) => {
           )
         }
       </button>
-      <TextInput placeholder="Buscar" iconName="search" className="rounded-xl" style={{ backgroundColor: '#EFEFEF' }} />
+      <TextInput
+        placeholder="Buscar"
+        iconName="search"
+        className="rounded-xl"
+        style={{ backgroundColor: '#EFEFEF' }}
+        name="search"
+        value={search}
+        onChange={handleSearch}
+      />
       <img src={dogAndCatBanner} alt="PetFinder Logo" className="w-16" />
     </header>
   )
