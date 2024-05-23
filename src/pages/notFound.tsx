@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { useAppSelector } from "../store/hooks";
+import notFoundImage from "../assets/images/notFoundImg.png"
 
 export const NotFound = () => {
   const navigate = useNavigate();
@@ -14,11 +15,18 @@ export const NotFound = () => {
     } else {
       setTimeout(() => {
         navigate('/home', { replace: true });
-      }, 400)
+      }, 1000)
     }
   }, [token, navigate]);
 
   return (
-    <div>NotFound</div>
+    <div className="h-96 flex flex-col items-center justify-center">
+        <img src={notFoundImage} alt="Not found" className="w-1/2 mx-auto" />
+      <p className="text-xl font-medium text-center px-4">
+        Lo sentimos, la página que buscas no existe
+        <br /> <br />
+        Serás redirigido en unos segundos
+      </p>
+    </div>
   )
 }
