@@ -101,3 +101,8 @@ export interface Image {
   id:         number;
   base64_url: string;
 }
+
+export interface PostSearchQueryParams {
+  postType: PublicationTypes;
+  animalType: AnimalTypes;
+}

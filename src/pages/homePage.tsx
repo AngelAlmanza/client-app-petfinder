@@ -26,7 +26,7 @@ export const HomePage = () => {
             <PetPost
               key={post.id}
               id={post.id}
-              buttonByPublish={<PostButton onClick={() => {}} type="lost" />}
+              buttonByPublish={<PostButton onClick={() => {}} type={post.type} />}
               username={post.user?.profile?.name}
               postImage={getPostImage(post.pet?.images)}
               altImage={`${post.title} post image`}

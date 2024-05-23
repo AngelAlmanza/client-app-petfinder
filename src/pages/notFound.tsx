@@ -21,7 +21,7 @@ export const NotFound = () => {
 
   return (
     <div className="h-96 flex flex-col items-center justify-center">
-        <img src={notFoundImage} alt="Not found" className="w-1/2 mx-auto" />
+      <img src={notFoundImage} alt="Not found" className="w-1/2 mx-auto" />
       <p className="text-xl font-medium text-center px-4">
         Lo sentimos, la página que buscas no existe
         <br /> <br />

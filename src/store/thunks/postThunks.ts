@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { petFinderApi } from "../../api/petFinderApi";
-import { CreatePostResponse, GetAllPostResponse, GetPostResponse, StorePostRequest } from "../../interfaces/PostInterfaces";
+import { CreatePostResponse, GetAllPostResponse, GetPostResponse, PostSearchQueryParams, StorePostRequest } from "../../interfaces/PostInterfaces";
+import Swal from "sweetalert2";
 
 export const createPost = createAsyncThunk(
   'post/createPost',
@@ -34,6 +35,29 @@ export const getPostById = createAsyncThunk(
     try {
       const response = await petFinderApi.get<GetPostResponse>(`/posts/${postId}`);
       return response.data.post;
+    } catch (error) {
+      console.error(error);
+      thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const getPostBySearch = createAsyncThunk(
+  'post/getPostBySearch',
+  async (search: PostSearchQueryParams, thunkAPI) => {
+    try {
+      const queryParams = new URLSearchParams();
+      if (search.postType !== '') {
+        queryParams.append('post-type', search.postType);
+      }
+      if (search.animalType !== '') {
+        queryParams.append('animal-type', search.animalType);
+      }
+      const response = await petFinderApi.get<GetAllPostResponse>(`/search?${queryParams.toString()}`);
+      if (response.data.posts.data.length === 0) {
+        Swal.fire('Error', 'No se encontraron resultados', 'error');
+      }
+      return response.data.posts.data;
     } catch (error) {
       console.error(error);
       thunkAPI.rejectWithValue(error);

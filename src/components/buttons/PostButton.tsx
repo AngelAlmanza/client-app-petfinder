@@ -1,7 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCrosshairs, faSearch, faDog, IconDefinition } from "@fortawesome/free-solid-svg-icons"
+import { PublicationTypes } from '../../enums/publicationTypes';
+import { getTypeByValue } from "../../utils/getTypeByValue"
 
-type PostType = 'found' | 'lost' | 'inAdoption' | 'more'
+enum ExtraPostType {
+  more = 'more',
+}
+
+type TagByPostType = PublicationTypes | ExtraPostType
 
 type ButtonTypeConfig = {
   label: string
@@ -9,19 +15,19 @@ type ButtonTypeConfig = {
   color: string
 }
 
-const ButtonPostConfig: Record<PostType, ButtonTypeConfig> = {
+const ButtonPostConfig: Record<TagByPostType, ButtonTypeConfig> = {
   found: {
-    label: 'Encontrado',
+    label: getTypeByValue(PublicationTypes.FOUND),
     icon: faCrosshairs,
     color: 'success-color',
   },
   lost: {
-    label: 'Perdido',
+    label: getTypeByValue(PublicationTypes.LOST),
     icon: faSearch,
     color: 'danger-color',
   },
-  inAdoption: {
-    label: 'En adopción',
+  adopt: {
+    label: getTypeByValue(PublicationTypes.ADOPT),
     icon: faDog,
     color: 'aux-color',
   },
@@ -30,10 +36,15 @@ const ButtonPostConfig: Record<PostType, ButtonTypeConfig> = {
     icon: null,
     color: 'primary-color',
   },
+  [PublicationTypes.DEFAULT]: {
+    label: getTypeByValue(PublicationTypes.DEFAULT),
+    icon: null,
+    color: 'gray-color',
+  }
 }
 
 type Props = {
-  type: PostType
+  type: TagByPostType
   text?: string
   styles?: React.CSSProperties
   onClick: () => void

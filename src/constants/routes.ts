@@ -7,6 +7,7 @@ export enum PublicRoutes {
 
 export enum PrivateRoutes {
   HOME_PAGE = '/home',
+  SEARCH_PAGE = '/search',
   POST_DETAILS_PAGE = '/post-details',
   CREATE_POST_PAGE = '/create-post',
   MESSENGER_PAGE = '/listmessenger',
