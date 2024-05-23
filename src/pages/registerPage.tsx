@@ -59,7 +59,7 @@ export const RegisterPage = () => {
                                             iconName="name"
                                             onChange={handleChange}
                                         />
-                                        {errors.name ? <p className="text-red-500 text-sm">{errors.name}</p> : null}
+                                        {errors.name ? <p className="text-red-500 text-sm lg:text-2xl lg:mt-4">{errors.name}</p> : null}
                                     </div>
                                     <div className="mb-4 w-4/5">
                                         <TextInput
@@ -69,7 +69,7 @@ export const RegisterPage = () => {
                                             iconName="email"
                                             onChange={handleChange}
                                         />
-                                        {errors.email ? <p className="text-red-500 text-sm">{errors.email}</p> : null}
+                                        {errors.email ? <p className="text-red-500 text-sm lg:text-2xl lg:mt-4">{errors.email}</p> : null}
                                     </div>
                                     <div className="mb-4 w-4/5 lg:mb-3">
                                         <TextInput
@@ -79,7 +79,7 @@ export const RegisterPage = () => {
                                             iconName="password"
                                             onChange={handleChange}
                                         />
-                                        {errors.password ? <p className="text-red-500 text-sm">{errors.password}</p> : null}
+                                        {errors.password ? <p className="text-red-500 text-sm lg:text-2xl lg:mt-4">{errors.password}</p> : null}
                                     </div>
                                     <ul className="w-fit mx-auto mb-4 md:mt-32 lg:mt-6">
                                         {

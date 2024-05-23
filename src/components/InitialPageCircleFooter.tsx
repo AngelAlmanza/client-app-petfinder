@@ -24,12 +24,12 @@ export const InitialPageCircleFooter = ({ onSubmit, isSubmitting }: Props) => {
 
   return (
     <div
-      className={`bg-white rounded-full flex flex-col items-center pt-10 md:-mx-28 md:pt-16 md:mt-20 lg:mt-4 lg:-ml-80 lg:pt-1  `}
+      className={`bg-white rounded-full flex flex-col items-center pt-10 md:-mx-28 md:pt-16 md:mt-20 lg:-mt-11 lg:bg-opacity-0 lg:border-8`}
       style={{
         width: screenSize,
         height: screenSize,
       }}>
-        <div className="w-100 md:mt-4 lg:mt-8">
+        <div className="w-100 md:mt-4">
           <SpecialButton text="Iniciar Sesión" onClick={onSubmit} isSubmitting={isSubmitting} type="submit" />
         </div>
         <div className="w-44 flex justify-center">

@@ -16,7 +16,7 @@ export const HomePage = () => {
 
   return (
     <>
-      <section className="mb-4 md:px-6 md:ml-1">
+      <section className="mb-4 md:px-6 md:ml-1 ">
         <TextAreaCreatePost value={newPostText} onChange={setNewPostText} />
       </section>
       <section className="grid grid-cols-1 gap-4">
