@@ -33,6 +33,7 @@ export interface Pet extends PetRequest {
   updated_at:  Date;
   created_at:  Date;
   id:          number;
+  images:      Image[];
 }
 
 export interface Post extends PostRequest {
@@ -94,4 +95,14 @@ export interface Profile {
   user_id:   number;
   created_at: Date;
   updated_at: Date;
+}
+
+export interface Image {
+  id:         number;
+  base64_url: string;
+}
+
+export interface PostSearchQueryParams {
+  postType: PublicationTypes;
+  animalType: AnimalTypes;
 }

@@ -4,6 +4,7 @@ import { TextAreaCreatePost } from "../components/TextAreaCreatePost";
 import { PostButton } from "../components/buttons/PostButton";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { getPosts } from "../store/thunks/postThunks";
+import { getPostImage } from "../utils/getPostImage";
 
 export const HomePage = () => {
   const dispatch = useAppDispatch();
@@ -25,9 +26,9 @@ export const HomePage = () => {
             <PetPost
               key={post.id}
               id={post.id}
-              buttonByPublish={<PostButton onClick={() => {}} type="lost" />}
+              buttonByPublish={<PostButton onClick={() => {}} type={post.type} />}
               username={post.user?.profile?.name}
-              postImage="https://via.placeholder.com/150"
+              postImage={getPostImage(post.pet?.images)}
               altImage={`${post.title} post image`}
               description={post.content}
             />

@@ -10,6 +10,7 @@ import { getTypeByValue } from "../utils/getTypeByValue";
 import { getAnimaltypeByValue } from "../utils/getAnimaltypeByValue";
 import { setCurrentPost } from "../store/slices/postSlice";
 import { ReportModal } from "../components/ReportModal";
+import { getPostImage } from "../utils/getPostImage";
 
 export const PostDetailsPage = () => {
   const [opacityButton, setOpacityButton] = useState<string>('opacity-0');
@@ -46,7 +47,7 @@ export const PostDetailsPage = () => {
   return (
     <>
       <section className="w-full h-72 relative md:px-20">
-        <img src="https://via.placeholder.com/150" className="w-full h-full object-cover rounded-lg" />
+        <img src={getPostImage(currentPost?.pet.images || [])} className="w-full h-full object-cover rounded-lg" />
         <span
           className="w-3/4 md:w-3/5 inline-flex justify-between items-center rounded-2xl py-1 px-3
           bg-red-500 font-bold text-white uppercase text-xl text-center md:text-2xl absolute bottom-0

@@ -1,16 +1,20 @@
 import {createSlice} from '@reduxjs/toolkit';
-import { Post } from '../../interfaces/PostInterfaces';
-import { createPost, getPostById, getPosts } from '../thunks/postThunks';
+import { Post, PostSearchQueryParams } from '../../interfaces/PostInterfaces';
+import { createPost, getPostById, getPostBySearch, getPosts } from '../thunks/postThunks';
 
 interface PostState {
   posts: Post[];
   currentPost: Post | null;
+  searchResults: Post[];
+  filters: PostSearchQueryParams | null;
   isLoading: boolean;
 }
 
 const initialState: PostState = {
   posts: [],
   currentPost: null,
+  searchResults: [],
+  filters: null,
   isLoading: false,
 };
 
@@ -20,6 +24,12 @@ export const postSlice = createSlice({
   reducers: {
     setCurrentPost: (state, action) => {
       state.currentPost = action.payload;
+    },
+    setSearchResults: (state, action) => {
+      state.searchResults = action.payload;
+    },
+    setFilters: (state, action) => {
+      state.filters = action.payload;
     },
   },
   extraReducers: builder => {
@@ -59,9 +69,23 @@ export const postSlice = createSlice({
     builder.addCase(getPostById.rejected, (state) => {
       state.isLoading = false;
     });
+
+    // GET POST BY SEARCH
+    builder.addCase(getPostBySearch.fulfilled, (state, action) => {
+      state.searchResults = action.payload || [];
+      state.isLoading = false;
+    });
+    builder.addCase(getPostBySearch.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getPostBySearch.rejected, (state) => {
+      state.isLoading = false;
+    });
   },
 });
 
 export const {
   setCurrentPost,
+  setSearchResults,
+  setFilters,
 } = postSlice.actions;
