@@ -44,7 +44,7 @@ export const Header = ({ openMenu, handleMenu }: Props) => {
   };
 
   return (
-    <header className='w-100 px-6 pt-3 pb-1 flex justify-between items-center'>
+    <header className='w-100 px-6 pt-3 pb-1 flex justify-between items-center '>
       <button
         className="bg-primary-gray text-text-primary-color px-3 py-2 rounded-lg mr-2 relative"
         onClick={handleMenu}
@@ -56,18 +56,18 @@ export const Header = ({ openMenu, handleMenu }: Props) => {
         }
         {
           openMenu && (
-            <nav className="w-44 py-6 rounded-3xl bg-primary-gray absolute top-16 left-0 header-transition-nav-bar z-50">
+            <nav className="w-44 py-6 rounded-3xl bg-primary-gray absolute top-16 left-0 header-transition-nav-bar z-50 lg:w-52">
               <div className="w-3/4 h-px bg-black mx-auto mb-2"></div>
               <ul className="w-100 flex flex-col items-start">
                 {
                   menuRoutes.map((route, index) => (
-                    <li key={index} className="w-full block">
+                    <li key={index} className="w-full block ">
                       <NavLink
                         to={route.path}
-                        className="w-full flex items-center px-6 py-2 text-text-primary-color hover:text-primary-color hover:bg-hover-bg transition"
+                        className="w-full flex items-center px-6 py-2 text-text-primary-color hover:text-primary-color hover:bg-hover-bg transition lg:w-30 lg:h-20 lg:text-xl"
                         onClick={(event) => handleLogout(event, route.path)}
                       >
-                        <FontAwesomeIcon icon={route.icon} className="mr-1" />
+                        <FontAwesomeIcon icon={route.icon} className="mr-1 lg:text-3xl" />
                         <span>{route.name}</span>
                       </NavLink>
                     </li>

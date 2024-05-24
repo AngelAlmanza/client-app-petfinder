@@ -36,7 +36,7 @@ export const ProfilePage = () => {
             <div className="absolute gradient-background overflow-hidden top-20 right-0 h-32 md:h-40 w-screen rounded-t-3xl" />
             <div className="flex flex-col items-center relative">
                 <div className="relative">
-                    <div className="">
+                    <div className="lg:ml-80">
                         <img src={Usericon} alt="PetFinder Logo" className="mt-8 drop-shadow-xl md:w-2/4 md:h-2/4 md:ml-48" />
                     </div>
                     {/* <div className="absolute bottom-0 right-20 mb-3 md:-mb-2  mr-0 md:mr-48">
