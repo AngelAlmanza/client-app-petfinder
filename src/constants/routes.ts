@@ -11,7 +11,7 @@ export enum PrivateRoutes {
   POST_DETAILS_PAGE = '/post-details',
   CREATE_POST_PAGE = '/create-post',
   MESSENGER_PAGE = '/listmessenger',
-  EDIT_PROFILE_PAGE = '/editporfile',
+  EDIT_PROFILE_PAGE = '/profile',
   LOGOUT_PAGE = '/logout',
   NOT_FOUND = '*',
 }

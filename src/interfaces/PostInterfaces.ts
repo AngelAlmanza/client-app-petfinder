@@ -1,5 +1,6 @@
 import { AnimalTypes } from "../enums/animalTypes";
 import { PublicationTypes } from "../enums/publicationTypes";
+import { Profile } from "./ProfileInterfaces";
 
 export interface StorePostRequest {
   pet:  PetRequest;
@@ -83,18 +84,6 @@ export interface User {
   created_at: Date;
   updated_at: Date;
   profile:   Profile;
-}
-
-export interface Profile {
-  id:        number;
-  name:       string;
-  lastname:  string;
-  city:      string;
-  profile_picture: string;
-  cover_picture:   string;
-  user_id:   number;
-  created_at: Date;
-  updated_at: Date;
 }
 
 export interface Image {
