@@ -62,7 +62,7 @@ export const PostButton = ({ type, text, styles, onClick }: Props) => {
       {
         config.icon && <FontAwesomeIcon icon={config.icon} className="text-white" />
       }
-      <span className="text-white text-xs md:text-xl font-medium ml-1">{ text || config.label }</span>
+      <span className="text-white text-xs md:text-xl lg:text-2xl font-medium ml-1">{ text || config.label }</span>
     </button>
   )
 }
