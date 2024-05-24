@@ -46,10 +46,10 @@ export const PostDetailsPage = () => {
 
   return (
     <>
-      <section className="w-full h-72 relative md:px-20">
+      <section className="w-full h-72 relative md:px-20 lg:px-52 lg:h-96">
         <img src={getPostImage(currentPost?.pet.images || [])} className="w-full h-full object-cover rounded-lg" />
         <span
-          className="w-3/4 md:w-3/5 inline-flex justify-between items-center rounded-2xl py-1 px-3
+          className="w-3/4 md:w-3/5 lg:w-2/5 inline-flex justify-between items-center rounded-2xl py-1 px-3
           bg-red-500 font-bold text-white uppercase text-xl text-center md:text-2xl absolute bottom-0
             left-1/2 -translate-x-1/2 translate-y-1/2"
         >
@@ -59,7 +59,7 @@ export const PostDetailsPage = () => {
         </span>
       </section>
 
-      <section className="w-100 md:px-14 relative flex gap-2 items-center mt-8">
+      <section className="w-100 md:px-14 lg:px-52 relative flex gap-2 items-center mt-8">
         <div className="w-3/4 flex items-center gap-4">
           <div className="w-12 h-12 md:w-16 md:h-16 rounded-full overflow-hidden shadow-xl filter">
             <img className="w-full h-full" src="https://via.placeholder.com/150" />
@@ -83,7 +83,7 @@ export const PostDetailsPage = () => {
         </div>
       </section>
 
-      <section>
+      <section className="lg:px-40">
         <h4 className="my-4 text-primary-color font-bold text-lg md:text-2xl md:px-14">Etiquetas</h4>
         <div className="flex items-center justify-center flex-wrap gap-1">
           <PostTag text={getTypeByValue(currentPost?.type!)} color="primary-color" />
@@ -91,7 +91,7 @@ export const PostDetailsPage = () => {
         </div>
       </section>
 
-      <section>
+      <section className="lg:px-40">
         <h4 className="my-4 text-primary-color font-bold text-lg md:text-2xl md:px-14 ">Visto por última vez en:</h4>
         <p className="text-sm md:text-lg text-text-primary-color font-medium md:px-14">
           <FontAwesomeIcon icon={faLocationDot} className="text-danger-color mr-1" />
@@ -99,7 +99,7 @@ export const PostDetailsPage = () => {
         </p>
       </section>
 
-      <section>
+      <section className="lg:px-40">
         <h4 className="my-4 text-primary-color font-bold text-lg md:text-2xl md:px-14">Detalles</h4>
         <p className="text-sm md:text-lg text-text-primary-color font-medium md:px-14">
           { currentPost?.content }

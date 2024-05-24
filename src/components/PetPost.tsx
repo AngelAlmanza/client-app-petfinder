@@ -28,7 +28,7 @@ export const PetPost = ({ id, username, description, postImage, altImage, button
 
   return (
     <Link
-      className="w-full rounded-2xl bg-white shadow p-1 flex flex-col no-underline md:px-10 md:max-w-2xl md:ml-7"
+      className="w-full rounded-2xl bg-white shadow p-1 flex flex-col no-underline md:px-10 md:max-w-2xl md:ml-7 lg:w-11/12"
       to={`${PrivateRoutes.POST_DETAILS_PAGE}/${id}`}
       style={styles}
     >
@@ -40,7 +40,7 @@ export const PetPost = ({ id, username, description, postImage, altImage, button
           />
         )
       }
-      <div className="px-2">
+      <div className="px-2 ">
         <div className="w-100 flex justify-between items-center my-3 relative">
           <div>
             <FontAwesomeIcon icon={faUser} className="text-text-primary-color text-xl md:text-3xl" />

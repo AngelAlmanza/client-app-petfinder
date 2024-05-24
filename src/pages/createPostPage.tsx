@@ -59,10 +59,12 @@ export const CreatePostPage = () => {
           if (values.animalType === AnimalTypes.DEFAULT) {
             errors.animalType = ERROR_MESSAGES.INVALID_TYPE_ANIMAL;
           }
+          console.log(errors)
 
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
+          console.log("hola")
           dispatch(createPost({
             pet: {
               name: values.petname,

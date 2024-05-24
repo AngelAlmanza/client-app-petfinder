@@ -20,7 +20,7 @@ const isValidPetName = (petname: string): boolean => petname.trim().length > 3;
 
 const isValidAddress = (address: string): boolean => address.trim().length > 8;
 
-const isValidDetails = (details: string): boolean => details.trim().length > 20;
+const isValidDetails = (details: string): boolean => details.trim().length > 0;
 
 export {
   isValidEmail,
