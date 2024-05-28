@@ -1,7 +1,7 @@
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { ChangeEvent, MouseEvent } from "react"
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import Swal from "sweetalert2"
 import dogAndCatBanner from '../../assets/images/dog-and-cat-banner.png'
 import { TextInput } from '../../components/inputs/TextInput'
@@ -10,6 +10,7 @@ import { useForm } from "../../hooks/useForm"
 import { useAppDispatch } from "../../store/hooks"
 import { logout } from "../../store/thunks/authThunks"
 import { PrivateRoutes } from "../../constants/routes"
+import { setSearchResults } from "../../store/slices/postSlice"
 
 type Props = {
   handleMenu: () => void
@@ -18,6 +19,7 @@ type Props = {
 
 export const Header = ({ openMenu, handleMenu }: Props) => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const {
     search,
     onChange
@@ -25,6 +27,11 @@ export const Header = ({ openMenu, handleMenu }: Props) => {
 
   const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
     onChange('search', event.target.value);
+  }
+
+  const handleOnFocus = () => {
+    dispatch(setSearchResults([]));
+    navigate(PrivateRoutes.SEARCH_PAGE);
   }
 
   const handleLogout = (e: MouseEvent<HTMLAnchorElement>, path: PrivateRoutes) => {
@@ -86,6 +93,7 @@ export const Header = ({ openMenu, handleMenu }: Props) => {
         name="search"
         value={search}
         onChange={handleSearch}
+        onFocus={handleOnFocus}
       />
       <img src={dogAndCatBanner} alt="PetFinder Logo" className="w-16" />
     </header>

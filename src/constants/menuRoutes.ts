@@ -1,4 +1,4 @@
-import { IconDefinition, faHome, faMessage, faRightFromBracket, faSearch, faUser } from "@fortawesome/free-solid-svg-icons";
+import { IconDefinition, faHome, faRightFromBracket, faSearch, faUser } from "@fortawesome/free-solid-svg-icons";
 import { PrivateRoutes } from "./routes";
 
 type MenuRoute = {
@@ -22,11 +22,6 @@ export const menuRoutes: MenuRoute[] = [
     path: PrivateRoutes.EDIT_PROFILE_PAGE,
     name: 'Mi perfil',
     icon: faUser
-  },
-  {
-    path: PrivateRoutes.MESSENGER_PAGE,
-    name: 'Chats',
-    icon: faMessage
   },
   {
     path: PrivateRoutes.LOGOUT_PAGE,

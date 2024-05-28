@@ -12,6 +12,7 @@ type Props = {
   className?: string;
   style?: React.CSSProperties;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onFocus?: () => void;
 }
 
 const ICONS: Record<IconName, IconDefinition> = {
@@ -21,7 +22,7 @@ const ICONS: Record<IconName, IconDefinition> = {
   'name': faUser,
 }
 
-export const TextInput = ({ name, value, placeholder, iconName, className, style, onChange }: Props) => {
+export const TextInput = ({ name, value, placeholder, iconName, className, style, onChange, onFocus }: Props) => {
   const icon = ICONS[iconName];
   const inputType = iconName === 'password' ? 'password' : 'text';
 
@@ -35,6 +36,7 @@ export const TextInput = ({ name, value, placeholder, iconName, className, style
         placeholder={placeholder}
         style={style}
         onChange={onChange}
+        onFocus={onFocus}
       />
       <FontAwesomeIcon color="#A3A3A3" icon={icon} className="absolute right-4 top-[14px]" />
     </div>
