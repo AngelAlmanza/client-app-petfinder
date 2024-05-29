@@ -4,3 +4,7 @@ export enum PublicationTypes {
   FOUND = 'found',
   DEFAULT = '',
 }
+
+export enum ExtraPostType {
+  more = 'more',
+}

@@ -4,6 +4,7 @@ import { ReactNode, useState } from "react";
 import { Link } from "react-router-dom";
 import { PrivateRoutes } from '../constants/routes';
 import { PostButton } from "./buttons/PostButton";
+import { ExtraPostType } from "../enums/publicationTypes";
 
 type Props = {
   id: number,
@@ -61,7 +62,10 @@ export const PetPost = ({ id, username, description, postImage, altImage, button
         </p>
         <div className="flex justify-between items-center my-2">
           { buttonByPublish }
-          <PostButton onClick={() => {}} type="more" />
+          <PostButton
+            onClick={() => {}}
+            type={ExtraPostType.more}
+          />
         </div>
       </div>
     </Link>

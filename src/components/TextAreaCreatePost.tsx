@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import { PostButton } from "./buttons/PostButton"
 import { PrivateRoutes } from "../constants/routes"
+import { ExtraPostType } from "../enums/publicationTypes"
 
 type Props = {
   value: string
@@ -23,7 +24,7 @@ export const TextAreaCreatePost = ({ value, onChange }: Props) => {
         <PostButton
           onClick={() => navigate(PrivateRoutes.CREATE_POST_PAGE)}
           text="Publicar"
-          type="more"
+          type={ExtraPostType.more}
         />
       </div>
     </div>

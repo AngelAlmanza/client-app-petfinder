@@ -1,11 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCrosshairs, faSearch, faDog, IconDefinition } from "@fortawesome/free-solid-svg-icons"
-import { PublicationTypes } from '../../enums/publicationTypes';
+import { ExtraPostType, PublicationTypes } from '../../enums/publicationTypes';
 import { getTypeByValue } from "../../utils/getTypeByValue"
-
-enum ExtraPostType {
-  more = 'more',
-}
 
 type TagByPostType = PublicationTypes | ExtraPostType
 
